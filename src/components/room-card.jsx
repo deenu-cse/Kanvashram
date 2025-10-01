@@ -70,7 +70,7 @@ export function RoomCard({ room, onBookNow }) {
           </div>
           <Button
             className="bg-green-700 hover:bg-green-800 text-white w-full text-sm py-1 mt-2 cursor-pointer"
-            onClick={() => onBookNow(room.id)}
+            onClick={() => onBookNow(room._id)}
           >
             Book Now
           </Button>

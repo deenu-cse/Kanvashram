@@ -25,7 +25,7 @@ const Navbar = () => {
         { label: 'Events', href: '/events' },
         { label: 'How to Reach', href: '/howtoreach' },
         { label: 'Gallery', href: '#gallery' },
-        { label: 'Contact', href: '#contact' }
+        { label: 'Stay', href: '/stay' }
     ];
 
 
@@ -43,10 +43,10 @@ const Navbar = () => {
                     <div className="flex items-center justify-between lg:justify-center">
 
                         <div className="flex-shrink-0 lg:absolute lg:left-8">
-                            <div className={`w-16 h-16 rounded-full border-2 shadow-lg overflow-hidden bg-white p-1 transition-all duration-300
+                            <div className={`w-16 h-16 rounded-full border-2 shadow-lg overflow-hidden bg-white p-0 transition-all duration-300
                                 ${isScrolled ? 'border-amber-200' : 'border-white/30'}`}>
                                 <img
-                                    src="/ashram.jpg"
+                                    src="/guruji.jpg"
                                     alt="Ashram Logo"
                                     className="w-full h-full rounded-full object-cover"
                                     onError={(e) => {

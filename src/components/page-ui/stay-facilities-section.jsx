@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import Link from "next/link"
 
 const mealSchedule = [
     { title: "Morning Prasad", time: "6:30 AM", note: "Herbal teas & seasonal fruits to awaken prana." },
@@ -83,17 +84,18 @@ export const StayFacilitiesSection = () => {
                             </ul>
                         </section>
                     </div>
-
-                    <Button
-                        size="lg"
-                        className="w-fit rounded-2xl px-8 py-3 text-base font-medium text-primary-foreground shadow-[0_18px_40px_rgba(128,155,107,0.28)] transition-transform hover:-translate-y-0.5 cursor-pointer"
-                        style={{
-                            background: "linear-gradient(125deg, #88734C 0%, #CBAA6F 100%)",
-                            color: "#fff",
-                        }}
-                    >
-                        Book Your Stay
-                    </Button>
+                    <Link href="/stay">
+                        <Button
+                            size="lg"
+                            className="w-fit rounded-2xl px-8 py-3 text-base font-medium text-primary-foreground shadow-[0_18px_40px_rgba(128,155,107,0.28)] transition-transform hover:-translate-y-0.5 cursor-pointer"
+                            style={{
+                                background: "linear-gradient(125deg, #88734C 0%, #CBAA6F 100%)",
+                                color: "#fff",
+                            }}
+                        >
+                            Book Your Stay
+                        </Button>
+                    </Link>
                 </article>
 
                 <aside className="relative z-10">

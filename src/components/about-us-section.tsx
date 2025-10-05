@@ -22,6 +22,7 @@ import {
   HeartHandshake,
 } from "lucide-react"
 import { motion, useScroll, useTransform, useInView, useSpring, Variants } from "framer-motion"
+import Link from "next/link"
 
 export default function AboutUsSection() {
   const [isVisible, setIsVisible] = useState(false)
@@ -124,7 +125,7 @@ export default function AboutUsSection() {
         className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-[#A9BBC8]/5 blur-3xl"
         style={{ y: y2, rotate: rotate2 }}
       />
-      
+
       {/* Reduced floating animation complexity */}
       <motion.div
         className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-[#88734C]/30"
@@ -210,13 +211,15 @@ export default function AboutUsSection() {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.4 }} // Reduced from 0.8 and 0.9
                 >
-                  <motion.button
-                    className="bg-white text-[#202e44] px-4 py-2 rounded-full flex items-center gap-2 text-sm font-medium"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    Our Heritage <ArrowRight className="w-4 h-4" />
-                  </motion.button>
+                  <Link href="/kanvashram">
+                    <motion.button
+                      className="bg-white text-[#202e44] px-4 py-2 rounded-full flex items-center gap-2 text-sm font-medium cursor-pointer"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      Our Heritage <ArrowRight className="w-4 h-4" />
+                    </motion.button>
+                  </Link>
                 </motion.div>
               </motion.div>
               <motion.div
@@ -256,7 +259,7 @@ export default function AboutUsSection() {
               ></motion.div>
             </motion.div>
           </div>
-          
+
           <div className="space-y-12"> {/* Reduced from 16 */}
             {objectives
               .filter((objective) => objective.position === "right")

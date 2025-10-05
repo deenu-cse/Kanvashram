@@ -2,6 +2,7 @@
 
 import { MapPin, BookOpen, ExternalLink } from 'lucide-react';
 import { Separator } from '../ui/separator';
+import Link from 'next/link';
 
 const Footer = () => {
     const openGoogleMaps = () => {
@@ -13,31 +14,31 @@ const Footer = () => {
 
     const books = [
         {
-            title: "The Wisdom of Kanvashram",
-            description: "Ancient teachings and spiritual practices",
-            image: "/images/books/wisdom-of-kanvashram.jpg",
-            buyLink: "#"
+            title: "Ancient Historical Heritage of Bharat Varsh English",
+            description: "The Wisdom of Kanvashram",
+            image: "/book-English.jpg",
+            buyLink: "/https://www.flipkart.com/kanvashram-birth-place-emperor-bharat-ancient-historical-heritage-varsh/p/itm06ece28556014?pid=9789334006216&marketplace=FLIPKART&cmpid=product.share.pp&_refId=PP.40452fcf-c8b1-4d85-92cf-cc8261f856ff.9789334006216&_appId=WA"
         },
         {
-            title: "Yoga & Meditation Guide",
-            description: "Complete guide to yogic practices",
-            image: "/images/books/yoga-meditation-guide.jpg",
-            buyLink: "#"
+            title: "Kanvashram Chakravarti Samrat Bharat ki Janamsthali",
+            description: "BharatVarsha ki ek Pauranik evam Etihasik Dharohar",
+            image: "/book-Hindi.jpg",
+            buyLink: "/https://www.flipkart.com/kanvashram-chakravarti-samrat-bharat-ki-janamsthali-tatha-bharatvarsha-ek-pauranik-evam-etihasik-dharohar/p/itm2413eaa930af6?pid=9789334012095&marketplace=FLIPKART&cmpid=product.share.pp&_refId=PP.b694a59a-927f-4b83-ab3b-9afd75ebe429.9789334012095&_appId=WA"
         }
     ];
 
     const quickLinks1 = [
-        { name: "About Kanvashram  Yoga Ashram", href: "/about" },
+        { name: "About Kanvashram Ashram", href: "/kanvashram" },
         { name: "Pay Kanvashram  Yoga Ashram", href: "#" },
         { name: "Our Privacy Policy", href: "/privacy-policy" },
         { name: "Terms & Conditions", href: "/terms-conditions" }
     ];
 
     const quickLinks2 = [
-        { name: "About Kanvashram  Yoga Ashram", href: "/about" },
-        { name: "Pay Kanvashram  Yoga Ashram", href: "#" },
-        { name: "Our Privacy Policy", href: "/privacy-policy" },
-        { name: "Terms & Conditions", href: "/terms-conditions" }
+        { name: "Archaeology", href: "/archaeology" },
+        { name: "Managment", href: "/managment" },
+        { name: "Stay", href: "/stay" },
+        { name: "Events", href: "/events" }
     ];
 
 
@@ -111,14 +112,16 @@ const Footer = () => {
                                 <div key={index} className="bg-gray-800 rounded-lg p-3">
                                     <div className="flex items-start space-x-3">
                                         <div className="w-12 h-16 bg-yellow-400/20 rounded flex items-center justify-center">
-                                            <BookOpen className="w-6 h-6 text-yellow-400" />
+                                            <img src={book.image} />
                                         </div>
                                         <div className="flex-1">
                                             <h5 className="font-medium text-sm mb-1">{book.title}</h5>
                                             <p className="text-xs text-gray-400 mb-2">{book.description}</p>
-                                            <button className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 text-xs px-3 py-1 rounded transition-colors duration-300 font-medium">
-                                                Buy Now
-                                            </button>
+                                            <Link href={book.buyLink}>
+                                                <button className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 text-xs px-3 py-1 rounded transition-colors duration-300 font-medium">
+                                                    Buy Now
+                                                </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -127,8 +130,8 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <Separator/>
-            <div c>
+            <Separator />
+            <div>
                 <div className="container mx-auto px-4 py-6">
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         <div className="text-white text-sm mb-4 md:mb-0">

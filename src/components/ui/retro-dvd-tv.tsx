@@ -250,7 +250,7 @@ const RetroDvdTv = () => {
               Where Mythology Meets History, Poetry & Archaeology
             </p>
           </div>
-          <div className="flex flex-row md:flex-col gap-2 md:gap-3">
+          <div className="flex flex-row md:flex-col gap-2 md:gap-3 flex-wrap">
             {["story", "history", "kalidas", "archaeology"].map(tab => (
               <button
                 key={tab}

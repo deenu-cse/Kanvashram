@@ -24,7 +24,7 @@ const Navbar = () => {
         { label: 'Archaeology', href: '/archaeology' },
         { label: 'Events', href: '/events' },
         { label: 'How to Reach', href: '/howtoreach' },
-        { label: 'Gallery', href: '#gallery' },
+        { label: 'Gallery', href: '/gallery' },
         { label: 'Stay', href: '/stay' }
     ];
 

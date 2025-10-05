@@ -4,22 +4,18 @@ import { FullScreenScrollFX, FullScreenFXAPI } from "@/components/ui/full-screen
 const sections = [
   {
     rightLabel: "Peace",
-    background: "https://images.pexels.com/photos/3289156/pexels-photo-3289156.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    background: "/homimg/homeimg1.png",
     audioSrc: "/sfx/click-01.mp3",
+    mbBackground: "/homimg/homeimg1-mb.png"
   },
   {
     rightLabel: "Balance",
-    background: "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    audioSrc: "/sfx/whoosh-02.mp3",
-  },
-  {
-    rightLabel: "Devotion",
-    background: "https://images.pexels.com/photos/1231265/pexels-photo-1231265.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    background: "/homimg/homimg2.png",
     audioSrc: "/sfx/whoosh-02.mp3",
   },
   {
     rightLabel: "Hospitality",
-    background: "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    background: "/homimg/homeimg4.png",
     audioSrc: "/sfx/whoosh-02.mp3",
   },
 ];

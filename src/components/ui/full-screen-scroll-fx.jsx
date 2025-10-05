@@ -256,20 +256,36 @@ export const FullScreenScrollFX = forwardRef((props, ref) => {
         <div className="fx-fixed-section" ref={fixedSectionRef}>
           <div className="fx-fixed" ref={fixedRef}>
             <div className="fx-bgs" aria-hidden="true">
-              {sections.map((s, i) => (
-                <div className="fx-bg" key={s.id ?? i}>
-                  {s.renderBackground ? s.renderBackground(index === i, lastIndexRef.current === i) : (
-                    <>
-                      <img ref={(el) => { if (el) bgRefs.current[i] = el; }} src={s.background} alt="" className="fx-bg-img" />
-                      <div className="fx-bg-overlay" />
-                    </>
-                  )}
-                </div>
-              ))}
+              {sections.map((s, i) => {
+                const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+
+                const bgImage = isMobile && s.mbBackground ? s.mbBackground : s.background;
+
+                return (
+                  <div className="fx-bg" key={s.id ?? i}>
+                    {s.renderBackground ? (
+                      s.renderBackground(index === i, lastIndexRef.current === i)
+                    ) : (
+                      <>
+                        <img
+                          ref={(el) => {
+                            if (el) bgRefs.current[i] = el;
+                          }}
+                          src={bgImage}
+                          alt=""
+                          className="fx-bg-img"
+                        />
+                        <div className="fx-bg-overlay" />
+                      </>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
+
       <style jsx>{`
           .fx {
             width: 100%;
@@ -308,7 +324,7 @@ export const FullScreenScrollFX = forwardRef((props, ref) => {
             opacity: 0;
             will-change: transform, opacity;
           }
-          .fx-bg-overlay { position: absolute; inset: 0; background: var(--fx-overlay); }
+          .fx-bg-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.2);; }
 
           .fx-header {
             grid-column: 1 / 13; align-self: start; padding-top: 6vh;

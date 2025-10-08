@@ -1,6 +1,6 @@
 import AboutUsSection from '@/components/about-us-section';
 import HomeHeader from '@/components/page-ui/firstHeader'
-import { YogaComponent } from '@/components/ui/yogasection';
+import { AshramBranches } from '@/components/ui/ashramBranches';
 import { StayFacilitiesSection } from '@/components/page-ui/stay-facilities-section';
 import { HistoryTimeline } from '@/components/page-ui/history-timeline';
 import { AshramThings } from '@/components/page-ui/ashramThings';
@@ -17,7 +17,7 @@ export default function Home() {
       <HomeHeader />
       <AboutUsSection />
       <GurusImage />
-      <YogaComponent />
+      <AshramBranches />
       <YogaSection />
       <main className="bg-background">
         <div className="flex min-h-screen flex-col justify-center px-1 py-10 pb-5 md:px-3 lg:py-7">

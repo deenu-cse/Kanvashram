@@ -10,35 +10,35 @@ const timelineEvents = [
     title: "Hermitage of Rishi Kanva",
     description:
       "Kanvashram flourished as the revered hermitage of Rishi Kanva, cherished as the birthplace of Bharat and immortalized by Kalidasa’s Abhijnan Shakuntalam, laying the spiritual foundation.",
-    image: "/images/timeline/ancient-hermitage.jpg",
+    image: "/guru/kanva-rishi.jpg",
   },
   {
     period: "1947–1950s",
     title: "Birth & Vedic Initiation of Swami Vishwapal",
     description:
       "Born on India’s independence day, Vishwapal Jayant’s Upanayana and Vedic studies at Gurukul Mahavidyalaya marked his journey to become Swami Vishwapal Saraswati.",
-    image: "/images/timeline/birth-vishwapal.jpg",
+    image: "/guru/swami-viswapal.jpg",
   },
   {
     period: "1955",
     title: "Revival of Kanva Ashram",
     description:
       "Nehru’s vision in Moscow and the foundation stone laying by dignitaries rekindled national focus on Kanva Ashram’s cultural and spiritual legacy.",
-    image: "/images/timeline/moscow-screening.jpg",
+    image: "/guru/kanvashram.jpg",
   },
   {
     period: "1960s–1970s",
     title: "Establishment & Growth of Gurukul Kanvashram",
     description:
       "From yogic feats and the title ‘Modern Bhima’ to founding Gurukul Kanvashram and overcoming wilderness challenges, a tradition of discipline was established.",
-    image: "/images/timeline/gurukul-river.jpg",
+    image: "/guru/growth.jpeg",
   },
   {
     period: "Lifetime",
     title: "Global Spiritual Legacy",
     description:
       "Swami Vishwapal’s dedication to yoga, Ayurveda, and international yoga camps spread the Gurukul ethos worldwide.",
-    image: "/images/timeline/spiritual-legacy.jpg",
+    image: "/guru/global.jpg",
   },
 ];
 

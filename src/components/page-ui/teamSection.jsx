@@ -14,12 +14,6 @@ import Autoplay from "embla-carousel-autoplay";
 
 const gurusData = [
     {
-        id: 1,
-        name: "Yogi Swami Jayant Saraswati",
-        position: "Ashram Founder",
-        image: "/guru/guru1-bg.png",
-    },
-    {
         id: 2,
         name: "Yogirishi Ashutosh Ji Maharaj",
         position: "Spiritual Head",
@@ -69,97 +63,117 @@ export default function GurusImage() {
                     </p>
                 </div>
 
-                <div className="max-w-6xl mx-auto">
-                    <Carousel
-                        plugins={[plugin.current]}
-                        className="w-full"
-                        opts={{
-                            align: "start",
-                            loop: true,
-                        }}
-                    >
-                        <CarouselContent className="-ml-2 md:-ml-4">
-                            {gurusData.map((guru) => (
-                                <CarouselItem
-                                    key={guru.id}
-                                    className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
-                                >
-                                    <div className="p-2">
-                                        <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-white rounded-2xl p-0">
-                                            <div className="relative aspect-[3/4] overflow-hidden">
-                                                <div className="w-full h-full bg-gradient-to-br from-amber-100 to-blue-100 flex items-center justify-center">
-                                                    <span className="text-slate-400 text-sm">
-                                                        Guru Image
-                                                    </span>
-                                                    <Image
-                                                        src={guru.image}
-                                                        alt={guru.name}
-                                                        fill
-                                                        className="object-cover"
-                                                    />
-                                                </div>
-
-                                                <div className="team-content">
-                                                    <p className="team-name">{guru.name}</p>
-                                                    {/* <p className="team-position">{guru.position}</p> */}
-                                                </div>
-                                            </div>
-                                        </Card>
-                                    </div>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-
-                        <div className="flex justify-center gap-4 mt-8">
-                            <CarouselPrevious className="relative static transform-none bg-white border-2 border-slate-200 hover:bg-slate-50 hover:border-amber-200 text-slate-700" />
-                            <CarouselNext className="relative static transform-none bg-white border-2 border-slate-200 hover:bg-slate-50 hover:border-amber-200 text-slate-700" />
+                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+                    <div className="w-full lg:w-2/5 order-1 lg:order-1">
+                        <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-2xl">
+                            <Image
+                                src="/guru/guru1-bg.png"
+                                alt="Yogi Swami Jayant Saraswati"
+                                fill
+                                className="object-cover"
+                            />
+                            <div className="absolute inset-0 flex items-end">
+                                <div className="p-6 text-white">
+                                    <h3 className="text-2xl font-bold mb-2">Yogi Swami Jayant Saraswati</h3>
+                                    <p className="text-amber-200 font-medium">Ashram Founder</p>
+                                </div>
+                            </div>
                         </div>
-                    </Carousel>
+                    </div>
+
+
+                    <div className="w-full lg:w-3/5 order-2 lg:order-2">
+                        <Carousel
+                            plugins={[plugin.current]}
+                            className="w-full"
+                            opts={{
+                                align: "start",
+                                loop: true,
+                            }}
+                        >
+                            <CarouselContent className="-ml-2 md:-ml-4">
+                                {gurusData.map((guru) => (
+                                    <CarouselItem
+                                        key={guru.id}
+                                        className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/2 xl:basis-1/3"
+                                    >
+                                        <div className="p-2">
+                                            <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-white rounded-2xl p-0">
+                                                <div className="relative aspect-[3/4] overflow-hidden">
+                                                    <div className="w-full h-full bg-gradient-to-br from-amber-100 to-blue-100 flex items-center justify-center">
+                                                        <span className="text-slate-400 text-sm">
+                                                            Guru Image
+                                                        </span>
+                                                        <Image
+                                                            src={guru.image}
+                                                            alt={guru.name}
+                                                            fill
+                                                            className="object-cover"
+                                                        />
+                                                    </div>
+
+                                                    <div className="team-content">
+                                                        <p className="team-name">{guru.name}</p>
+                                                        {/* <p className="team-position">{guru.position}</p> */}
+                                                    </div>
+                                                </div>
+                                            </Card>
+                                        </div>
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+
+                            <div className="flex justify-center gap-4 mt-8">
+                                <CarouselPrevious className="relative static transform-none bg-white border-2 border-slate-200 hover:bg-slate-50 hover:border-amber-200 text-slate-700" />
+                                <CarouselNext className="relative static transform-none bg-white border-2 border-slate-200 hover:bg-slate-50 hover:border-amber-200 text-slate-700" />
+                            </div>
+                        </Carousel>
+                    </div>
                 </div>
             </div>
 
             <style jsx>{`
-        .team-content {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  top: auto;
-  z-index: 9;
-  margin: auto;
-  background: linear-gradient(
-    0deg,
-    rgba(136, 115, 76, 0.95) 40%, 
-    rgba(136, 115, 76, 0.1) 100%   
-  );
-  padding: 20px 15px 15px;
-  transform: translateY(0);
-  transition: all 0.3s ease;
-}
-        .team-name {
-          color: white;
-          font-size: 1.125rem;
-          font-weight: 600;
-          margin-bottom: 0.25rem;
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        }
+                .team-content {
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    top: auto;
+                    z-index: 9;
+                    margin: auto;
+                    background: linear-gradient(
+                        0deg,
+                        rgba(136, 115, 76, 0.95) 40%, 
+                        rgba(136, 115, 76, 0.1) 100%   
+                    );
+                    padding: 20px 15px 15px;
+                    transform: translateY(0);
+                    transition: all 0.3s ease;
+                }
+                .team-name {
+                    color: white;
+                    font-size: 1.125rem;
+                    font-weight: 600;
+                    margin-bottom: 0.25rem;
+                    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+                }
 
-        .team-position {
-          color: rgba(255, 255, 255, 0.9);
-          font-size: 0.875rem;
-          font-weight: 400;
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        }
+                .team-position {
+                    color: rgba(255, 255, 255, 0.9);
+                    font-size: 0.875rem;
+                    font-weight: 400;
+                    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+                }
 
-        .relative:hover .team-content {
-          background: linear-gradient(
-    0deg,
-    rgba(136, 115, 76, 0.95) 40%, 
-    rgba(136, 115, 76, 0.1) 100%   
-  );
-        padding-bottom: 20px;
-        }
-      `}</style>
+                .relative:hover .team-content {
+                    background: linear-gradient(
+                        0deg,
+                        rgba(136, 115, 76, 0.95) 40%, 
+                        rgba(136, 115, 76, 0.1) 100%   
+                    );
+                    padding-bottom: 20px;
+                }
+            `}</style>
         </section>
     );
 }

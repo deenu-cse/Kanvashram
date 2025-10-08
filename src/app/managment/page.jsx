@@ -24,32 +24,20 @@ const KanvashramManagment = () => {
     }, []);
 
     const members = [
-        { sno: 1, name: "Lt.Cdr V.S.Rawat", status: "President", remark: "Retd Naval Officer" },
-        { sno: 2, name: "Shri Charkradhar Sharma", status: "Vice President", remark: "Retd" },
-        { sno: 3, name: "Smt Abha Dabral", status: "General Secretary", remark: "Social Worker" },
-        { sno: 4, name: "Shri C.P. Naithani", status: "Secretary", remark: "Retd" },
-        { sno: 5, name: "Shri Mohan Singh Rawat", status: "Treasurer", remark: "Social Worker" },
-        { sno: 6, name: "Shri Sitaram Kandwal", status: "Auditor", remark: "Medical Services" },
-        { sno: 7, name: "Shri B.D. Uniyal", status: "Patron", remark: "Retd Principal" },
-        { sno: 8, name: "Shri T.P. Daundiyal", status: "Patron", remark: "Retd Principal" },
-        { sno: 9, name: "Shri Pratap Singh Bist", status: "Patron", remark: "Retd Ex. Eng" },
-        { sno: 10, name: "Shri C.P. Kukrati", status: "Patron", remark: "Businessman" },
-        { sno: 11, name: "Shri J.P. Dashmana", status: "Member", remark: "Retd" },
-        { sno: 12, name: "Shri P.S. Rawat", status: "Member", remark: "Retd" },
-        { sno: 13, name: "Dr Y.S. Bist", status: "Member", remark: "DG Med Ser UK (Retd)" },
-        { sno: 14, name: "Shri Rajeeve Bist", status: "Member", remark: "Agriculturist" },
-        { sno: 15, name: "Dr. Jai Singh Rawat", status: "Member", remark: "Medical Services" },
-        { sno: 16, name: "Shri R.C. Gaur", status: "Member", remark: "Retd" },
-        { sno: 17, name: "Smt Jamuna Bhaguna", status: "Member", remark: "House Wife" },
-        { sno: 18, name: "Shri K.K. Shrivastav", status: "Member", remark: "Lawyer" },
-        { sno: 19, name: "Smt Renu Bist", status: "Member", remark: "House Wife" },
-        { sno: 20, name: "Shri Kalash Chand", status: "Member", remark: "Businessman" },
-        { sno: 21, name: "Dr N.K. Uniyal", status: "Member", remark: "Med Services" },
-        { sno: 22, name: "Dr D.S. Chauhan", status: "Member", remark: "Retd Principal" },
-        { sno: 23, name: "Shri Burakoti", status: "Member", remark: "Teacher" },
-        { sno: 24, name: "Shri C.M. Binjola", status: "Member", remark: "Retd" },
+        { sno: 1, name: "Swami Vishwapa Jayant Saraswati", status: "Chief Preceptor / Founder" },
+        { sno: 2, name: "Swami Chidanand Saraswati", status: "President / Patron" },
+        { sno: 3, name: "Bhaktawar Singh", status: "Vice President" },
+        { sno: 4, name: "Dr. Dharmendra Kumar Balyan", status: "Secretary" },
+        { sno: 5, name: "Rajpal Singh", status: "Joint Secretary" },
+        { sno: 6, name: "Nancy Vashistha Tripathi", status: "Treasurer" },
+        { sno: 7, name: "Sadhvi Bhagwati Saraswati", status: "Member" },
+        { sno: 8, name: "Vimal Wadhawan (Yogacharya)", status: "Member" },
+        { sno: 9, name: "Dheer Singh", status: "Member" },
+        { sno: 10, name: "Deepak Kumar Sharma", status: "Member" },
+        { sno: 11, name: "Gurmeet Singh Oberai", status: "Member" },
+        { sno: 12, name: "Rajeev Balyan", status: "Member" },
+        { sno: 13, name: "Acharya (Ex-officio)", status: "Member" },
     ];
-
 
     return (
         <div className="min-h-screen bg-amber-50 bg-opacity-100 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cfilter%20id%3D%22noise%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.9%22%20numOctaves%3D%221%22%20/%3E%3C/filter%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20filter%3D%22url%28%23noise%29%22%20opacity%3D%220.1%22%20/%3E%3C/svg%3E')]">

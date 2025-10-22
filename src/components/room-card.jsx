@@ -32,7 +32,7 @@ export function RoomCard({ room, onBookNow }) {
       <div className="flex flex-row h-full">
         <div className="w-1/3">
           <img
-            src={room.image || "/placeholder.svg"}
+            src={room.images[0] || "/placeholder.svg"}
             alt={room.name}
             className="w-full h-full object-cover"
           />

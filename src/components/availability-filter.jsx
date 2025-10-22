@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -9,9 +9,28 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CalendarIcon, UsersIcon } from "lucide-react"
 
 export function AvailabilityFilter({ onFiltersChange, initialFilters }) {
-  const [checkIn, setCheckIn] = useState(initialFilters.checkIn || "")
-  const [checkOut, setCheckOut] = useState(initialFilters.checkOut || "")
+  // Helper function to format date as YYYY-MM-DD
+  const formatDate = (date) => {
+    return date.toISOString().split('T')[0]
+  }
+
+  // Get today's and tomorrow's dates
+  const today = new Date()
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 1)
+
+  const [checkIn, setCheckIn] = useState(initialFilters.checkIn || formatDate(today))
+  const [checkOut, setCheckOut] = useState(initialFilters.checkOut || formatDate(tomorrow))
   const [guests, setGuests] = useState(initialFilters.guests || "1")
+
+  // Auto-call API on first load
+  useEffect(() => {
+    onFiltersChange({
+      checkIn: formatDate(today),
+      checkOut: formatDate(tomorrow),
+      guests: 1,
+    })
+  }, []) // Empty dependency array means this runs once on mount
 
   const handleSearch = () => {
     onFiltersChange({
@@ -42,6 +61,7 @@ export function AvailabilityFilter({ onFiltersChange, initialFilters }) {
               value={checkIn}
               onChange={(e) => setCheckIn(e.target.value)}
               className="border-green-500"
+              min={formatDate(today)}
             />
           </div>
 
@@ -56,6 +76,7 @@ export function AvailabilityFilter({ onFiltersChange, initialFilters }) {
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
               className="border-green-500"
+              min={formatDate(tomorrow)}
             />
           </div>
 

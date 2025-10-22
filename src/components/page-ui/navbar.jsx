@@ -25,7 +25,8 @@ const Navbar = () => {
         { label: 'Events', href: '/events' },
         { label: 'How to Reach', href: '/howtoreach' },
         { label: 'Gallery', href: '/gallery' },
-        { label: 'Stay', href: '/stay' }
+        { label: 'Stay', href: '/stay' },
+        { label: 'Donate', href: '/donate' }
     ];
 
 

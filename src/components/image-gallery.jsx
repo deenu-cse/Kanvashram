@@ -7,10 +7,10 @@ export function ImageGallery({images}) {
   const [selectedImage, setSelectedImage] = useState(0)
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       <div className="relative aspect-[16/10] rounded-lg overflow-hidden">
         <Image
-          src={images[selectedImage].url || "/placeholder.svg"}
+          src={images[selectedImage] || "/placeholder.svg"}
           alt={images[selectedImage].alt}
           fill
           className="object-cover"
@@ -18,7 +18,7 @@ export function ImageGallery({images}) {
         />
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-1">
         {images.map((image, index) => (
           <button
             key={index}
@@ -27,7 +27,7 @@ export function ImageGallery({images}) {
               selectedImage === index ? "border-primary" : "border-transparent hover:border-border"
             }`}
           >
-            <Image src={image.data } alt='' fill className="object-cover" />
+            <Image src={image} alt='' fill className="object-cover" />
           </button>
         ))}
       </div>

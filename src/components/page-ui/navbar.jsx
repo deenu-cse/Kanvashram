@@ -26,7 +26,7 @@ const Navbar = () => {
         { label: 'How to Reach', href: '/howtoreach' },
         { label: 'Gallery', href: '/gallery' },
         { label: 'Stay', href: '/stay' },
-        { label: 'Donate', href: '/donate' }
+        { label: 'Donate Now', href: '/donate' }
     ];
 
 

@@ -4,13 +4,12 @@ import { useState, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Calendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Progress } from "@/components/ui/progress"
 import { format, differenceInDays } from "date-fns"
-import { CalendarIcon, MapPin, Users, Bed, Shield, CreditCard, CheckCircle2, ArrowLeft, Star, Wifi, Coffee, Car, Utensils, Leaf, Mountain, Heart } from "lucide-react"
+import { CalendarIcon, MapPin, Users, Bed, Shield, CreditCard, CheckCircle2, ArrowLeft, Star, Wifi, Coffee, Car, Utensils, Leaf, Mountain, Heart, Mail, Calendar, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 
@@ -21,6 +20,8 @@ export default function BookingPage() {
   const [room, setRoom] = useState(null)
   const [loading, setLoading] = useState(true)
   const [processing, setProcessing] = useState(false)
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false)
+  const [countdownProgress, setCountdownProgress] = useState(100)
   const [guestInfo, setGuestInfo] = useState({
     guestName: "",
     guestEmail: "",
@@ -36,7 +37,6 @@ export default function BookingPage() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
   useEffect(() => {
-    // Check if user is authenticated
     const token = localStorage.getItem('ashramUserToken')
     if (!token) {
       router.push(`/signin?redirect=/stay/booking?${searchParams.toString()}`)
@@ -49,7 +49,31 @@ export default function BookingPage() {
       toast.error("Missing booking information")
       router.push('/')
     }
-  }, [roomId, checkIn, checkOut])
+  }, [roomId, router, searchParams])
+
+  // Countdown effect for success dialog
+  useEffect(() => {
+    if (showSuccessDialog) {
+      const duration = 5000 // 5 seconds
+      const interval = 50 // update every 50ms
+      const steps = duration / interval
+      const decrement = 100 / steps
+
+      const timer = setInterval(() => {
+        setCountdownProgress(prev => {
+          const newProgress = prev - decrement
+          if (newProgress <= 0) {
+            clearInterval(timer)
+            router.push('/')
+            return 0
+          }
+          return newProgress
+        })
+      }, interval)
+
+      return () => clearInterval(timer)
+    }
+  }, [showSuccessDialog, router])
 
   const fetchRoomDetails = async () => {
     try {
@@ -137,7 +161,8 @@ export default function BookingPage() {
       const data = await response.json()
 
       if (data.success) {
-        toast.success("Booking successfully!")
+        setShowSuccessDialog(true)
+        toast.success("Booking successful!")
       } else {
         toast.error(data.message || "Booking failed")
       }
@@ -339,8 +364,9 @@ export default function BookingPage() {
           </Button>
 
           <div className="grid lg:grid-cols-3 gap-8">
+            {/* Left Column - Booking Form */}
             <div className="lg:col-span-2 space-y-6">
-              <Card className="border-2 border-primary/20 pt-0">
+              <Card className="border-2 border-primary/20 pt-0 shadow-lg">
                 <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-t-lg">
                   <CardTitle className="flex items-center space-x-2 font-serif">
                     <Users className="w-5 h-5" />
@@ -390,7 +416,7 @@ export default function BookingPage() {
                 </CardContent>
               </Card>
 
-              <Card className="border-2 border-primary/20">
+              <Card className="border-2 border-primary/20 shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-xl font-serif">Booking Summary</CardTitle>
                 </CardHeader>
@@ -437,7 +463,7 @@ export default function BookingPage() {
                 </CardContent>
               </Card>
 
-              <Card className="border-2 border-primary/20">
+              <Card className="border-2 border-primary/20 shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-xl font-serif">Room Amenities</CardTitle>
                 </CardHeader>
@@ -454,8 +480,9 @@ export default function BookingPage() {
               </Card>
             </div>
 
+            {/* Right Column - Price Summary */}
             <div className="space-y-6">
-              <Card className="border-2 border-accent/20 sticky -top-24 pt-0 pb-1">
+              <Card className="border-2 border-accent/20 sticky top-24 shadow-xl">
                 <CardHeader className="bg-gradient-to-r from-accent to-accent/80 text-accent-foreground rounded-t-lg">
                   <CardTitle className="flex items-center justify-between font-serif">
                     <span>Price Summary</span>
@@ -465,7 +492,7 @@ export default function BookingPage() {
                 <CardContent className="p-6 space-y-4">
                   {bookingData && (
                     <>
-                      <div className="space-y-3 pt-0">
+                      <div className="space-y-3">
                         <div className="flex justify-between text-sm">
                           <span className="text-muted-foreground">₹{room.price} x {bookingData.nights} night{bookingData.nights > 1 ? 's' : ''}</span>
                           <span className="text-foreground">₹{bookingData.roomPrice}</span>
@@ -496,7 +523,7 @@ export default function BookingPage() {
                       <Button
                         onClick={handleBookNow}
                         disabled={processing}
-                        className="w-full h-12 bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-accent-foreground font-serif font-semibold text-lg"
+                        className="w-full h-12 bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-accent-foreground font-serif font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                       >
                         {processing ? (
                           <>
@@ -517,7 +544,7 @@ export default function BookingPage() {
               </Card>
 
               {/* Spiritual Trust Badges */}
-              <Card className="border-2 border-primary/20">
+              <Card className="border-2 border-primary/20 shadow-lg">
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3">
@@ -551,20 +578,84 @@ export default function BookingPage() {
                   </div>
                 </CardContent>
               </Card>
-
-              <Card className="border-2 border-accent/20 bg-accent/5">
-                <CardContent className="p-6">
-                  <div className="text-center space-y-2">
-                    <div className="mx-4 text-amber-500 text-2xl">ॐ</div>
-                    <p className="text-sm text-muted-foreground italic">
-                      "May your stay bring peace, clarity, and spiritual rejuvenation"
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </div>
+
+        {/* Success Dialog */}
+        <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+          <DialogContent className="sm:max-w-md border-0 shadow-2xl bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-950 dark:to-emerald-900">
+            <div className="flex flex-col items-center text-center p-6">
+              {/* Animated Checkmark */}
+              <div className="relative mb-6">
+                <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+                  <CheckCircle2 className="w-10 h-10 text-white animate-in zoom-in duration-500" />
+                </div>
+                <div className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-20"></div>
+              </div>
+
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-serif text-green-800 dark:text-green-200">
+                  Booking Confirmed!
+                </DialogTitle>
+                <DialogDescription className="text-lg text-green-700 dark:text-green-300 mt-2">
+                  Your room has been successfully booked
+                </DialogDescription>
+              </DialogHeader>
+
+              {/* Booking Details */}
+              <div className="w-full max-w-xs space-y-4 my-6">
+                <div className="flex items-center justify-between p-3 bg-white/50 dark:bg-white/10 rounded-lg">
+                  <div className="flex items-center space-x-2">
+                    <Mail className="w-4 h-4 text-green-600" />
+                    <span className="text-sm font-medium">Confirmation Sent</span>
+                  </div>
+                  <CheckCircle2 className="w-4 h-4 text-green-600" />
+                </div>
+                
+                <div className="flex items-center justify-between p-3 bg-white/50 dark:bg-white/10 rounded-lg">
+                  <div className="flex items-center space-x-2">
+                    <Calendar className="w-4 h-4 text-green-600" />
+                    <span className="text-sm font-medium">{format(checkIn, "MMM dd")} - {format(checkOut, "MMM dd")}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between p-3 bg-white/50 dark:bg-white/10 rounded-lg">
+                  <div className="flex items-center space-x-2">
+                    <Users className="w-4 h-4 text-green-600" />
+                    <span className="text-sm font-medium">{guests} Guest{guests > 1 ? 's' : ''}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="w-full space-y-2">
+                <div className="flex justify-between text-sm text-green-700 dark:text-green-300">
+                  <span>Redirecting to home...</span>
+                  <span>{Math.ceil(countdownProgress / 20)}s</span>
+                </div>
+                <Progress 
+                  value={countdownProgress} 
+                  className="w-full h-2 bg-green-200 dark:bg-green-800"
+                  indicatorClassName="bg-gradient-to-r from-green-500 to-emerald-600 transition-all duration-50 ease-linear"
+                />
+              </div>
+
+              <div className="mt-6 p-4 bg-white/30 dark:bg-white/5 rounded-lg border border-green-200 dark:border-green-700">
+                <div className="text-3xl text-amber-500 mb-2">ॐ</div>
+                <p className="text-sm text-green-700 dark:text-green-300 italic">
+                  "May your stay bring peace, clarity, and spiritual rejuvenation"
+                </p>
+              </div>
+
+              <Button
+                onClick={() => router.push('/')}
+                className="mt-4 bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white shadow-lg"
+              >
+                Go to Home Now
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </>
   )

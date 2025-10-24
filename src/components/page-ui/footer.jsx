@@ -15,28 +15,28 @@ const Footer = () => {
     const books = [
         {
             title: "Ancient Historical Heritage of Bharat Varsh English",
-            description: "The Wisdom of Kanvashram",
+            description: "The Wisdom of Kanvashram", 
             image: "/book-English.jpg",
-            buyLink: "/https://www.flipkart.com/kanvashram-birth-place-emperor-bharat-ancient-historical-heritage-varsh/p/itm06ece28556014?pid=9789334006216&marketplace=FLIPKART&cmpid=product.share.pp&_refId=PP.40452fcf-c8b1-4d85-92cf-cc8261f856ff.9789334006216&_appId=WA"
+            buyLink: "https://www.flipkart.com/kanvashram-birth-place-emperor-bharat-ancient-historical-heritage-varsh/p/itm06ece28556014?pid=9789334006216&marketplace=FLIPKART&cmpid=product.share.pp&_refId=PP.40452fcf-c8b1-4d85-92cf-cc8261f856ff.9789334006216&_appId=WA"
         },
         {
             title: "Kanvashram Chakravarti Samrat Bharat ki Janamsthali",
             description: "BharatVarsha ki ek Pauranik evam Etihasik Dharohar",
-            image: "/book-Hindi.jpg",
-            buyLink: "/https://www.flipkart.com/kanvashram-chakravarti-samrat-bharat-ki-janamsthali-tatha-bharatvarsha-ek-pauranik-evam-etihasik-dharohar/p/itm2413eaa930af6?pid=9789334012095&marketplace=FLIPKART&cmpid=product.share.pp&_refId=PP.b694a59a-927f-4b83-ab3b-9afd75ebe429.9789334012095&_appId=WA"
+            image: "/book-Hindi.jpg", 
+            buyLink: "https://www.flipkart.com/kanvashram-chakravarti-samrat-bharat-ki-janamsthali-tatha-bharatvarsha-ek-pauranik-evam-etihasik-dharohar/p/itm2413eaa930af6?pid=9789334012095&marketplace=FLIPKART&cmpid=product.share.pp&_refId=PP.b694a59a-927f-4b83-ab3b-9afd75ebe429.9789334012095&_appId=WA"
         }
     ];
 
     const quickLinks1 = [
         { name: "About Kanvashram Ashram", href: "/kanvashram" },
-        { name: "Pay Kanvashram  Yoga Ashram", href: "#" },
-        { name: "Our Privacy Policy", href: "/privacy-policy" },
-        { name: "Terms & Conditions", href: "/terms-conditions" }
+        { name: "Pay Kanvashram Yoga Ashram", href: "/donate" },
+        // { name: "Our Privacy Policy", href: "/privacy-policy" },
+        // { name: "Terms & Conditions", href: "/terms-conditions" }
     ];
 
     const quickLinks2 = [
         { name: "Archaeology", href: "/archaeology" },
-        { name: "Managment", href: "/managment" },
+        // { name: "Managment", href: "/managment" },
         { name: "Stay", href: "/stay" },
         { name: "Events", href: "/events" }
     ];
@@ -117,11 +117,11 @@ const Footer = () => {
                                         <div className="flex-1">
                                             <h5 className="font-medium text-sm mb-1">{book.title}</h5>
                                             <p className="text-xs text-gray-400 mb-2">{book.description}</p>
-                                            <Link href={book.buyLink}>
+                                            <a href={book.buyLink} target="_blank" rel="noopener noreferrer">
                                                 <button className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 text-xs px-3 py-1 rounded transition-colors duration-300 font-medium">
                                                     Buy Now
                                                 </button>
-                                            </Link>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@ const Footer = () => {
                         <div className="text-white text-sm mb-4 md:mb-0">
                             © {new Date().getFullYear()} Kanvashram Ashram. All rights reserved.
                         </div>
-                        <div className="flex space-x-6 text-white">
+                        {/* <div className="flex space-x-6 text-white">
                             <a href="#" className="text-white hover:text-yellow-400 transition-colors duration-300 text-sm">
                                 Privacy Policy
                             </a>
@@ -147,7 +147,7 @@ const Footer = () => {
                             <a href="#" className="text-white hover:text-yellow-400 transition-colors duration-300 text-sm">
                                 Contact
                             </a>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

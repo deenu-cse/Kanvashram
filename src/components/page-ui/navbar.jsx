@@ -58,9 +58,9 @@ const Navbar = () => {
                         </div>
 
                         <div className="text-center lg:flex-grow">
-                            <h1 className={`text-3xl lg:text-4xl font-bold tracking-wide transition-colors duration-300 font-serif
+                            <h1 className={`text-xl lg:text-4xl font-bold tracking-wide transition-colors duration-300 font-serif
                                 ${isScrolled ? 'text-amber-900' : 'text-white'}`}>
-                                कण्वाश्रम
+                                वैदिक गुरुकुल कण्वाश्रम
                             </h1>
                             <p className={`text-sm lg:text-base italic font-serif mt-1 transition-colors duration-300
                                 ${isScrolled ? 'text-amber-600 animate-pulse-slow' : 'text-amber-400'}`}>

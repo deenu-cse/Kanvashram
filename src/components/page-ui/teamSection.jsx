@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const gurusData = [
     {
@@ -53,16 +56,19 @@ export default function GurusImage() {
     return (
         <section className="w-full py-5 md:py-10 lg:py-12 bg-gradient-to-b from-[#F2F2EB] to-[#f5f5b5]">
             <div className="container px-4 md:px-6 mx-auto">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
-                        Our Spiritual Guides
-                    </h2>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Meet the enlightened souls who guide us on the path of spirituality
-                        and self-realization
+                <div className="text-center mb-16">
+                    <div className="flex items-center justify-center gap-3 mb-3">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4"> Our Spiritual Guides </h2>
+                        <span className="bg-gradient-to-r from-amber-400 to-yellow-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow-sm">
+                            In Event
+                        </span>
+                    </div>
+
+                    <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                        Meet the enlightened souls who guide us on the path of spirituality and
+                        self-realization.
                     </p>
                 </div>
-
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
                     <div className="w-full lg:w-2/5 order-1 lg:order-1">
                         <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-2xl">
@@ -79,6 +85,15 @@ export default function GurusImage() {
                                 </div>
                             </div>
                         </div>
+                        <Link href="/swamisivpal">
+                            <motion.button
+                                className="bg-white text-[#202e44] px-4 py-2 rounded-full flex items-center gap-2 text-sm font-medium cursor-pointer"
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.97 }}
+                            >
+                                Read <ArrowRight className="w-4 h-4" />
+                            </motion.button>
+                        </Link>
                     </div>
 
 
@@ -174,6 +189,6 @@ export default function GurusImage() {
                     padding-bottom: 20px;
                 }
             `}</style>
-        </section>
+        </section >
     );
 }

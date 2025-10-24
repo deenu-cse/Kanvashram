@@ -36,7 +36,7 @@ const ashramSections = [
   {
     id: 4,
     title: "Vedic Learning Center",
-    image: "/guru/kanvashram.jpg",
+    image: "/smarknew.jpg",
     quote: "Knowledge is the greatest treasure.",
     author: "Upanishads",
   },

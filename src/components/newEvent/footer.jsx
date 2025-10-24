@@ -33,7 +33,7 @@ export default function Footer() {
               <h3 className="font-semibold text-foreground">Phone</h3>
             </div>
             <p className="text-sm text-muted-foreground">
-              +91 (XXX) XXX-XXXX
+              +91 9837162511
               <br />
               Available 9 AM - 6 PM IST
             </p>

@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { FaBed, FaSnowflake, FaShower, FaWifi, FaUtensils, FaSpa } from "react-icons/fa";
+import Link from "next/link";
 
 const rooms = [
   {
@@ -78,16 +79,18 @@ export function AshramStay() {
                       </div>
                     </div>
                     <div className="w-1/3 p-2 flex flex-col justify-end items-end border-l border-green-700 relative">
-                    <p className="text-red-500 text-sm font-semibold absolute top-2">10% off</p>
+                      <p className="text-red-500 text-sm font-semibold absolute top-2">10% off</p>
                       <div className="text-right">
                         <p className="text-gray-500 line-through font-medium text-base">
                           ₹{(room.price * 1.1).toFixed(0)}
                         </p>
                         <p className="text-green-700 font-bold text-base">₹{room.price}/night</p>
                       </div>
-                      <Button className="bg-green-700 hover:bg-green-800 text-white w-full text-sm py-1 mt-2 cursor-pointer">
-                        Book Now
-                      </Button>
+                      <Link href={'/stay'}>
+                        <Button className="bg-green-700 hover:bg-green-800 text-white w-full text-sm py-1 mt-2 cursor-pointer">
+                          Book Now
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </Card>

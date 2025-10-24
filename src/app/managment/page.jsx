@@ -85,7 +85,7 @@ const KanvashramManagment = () => {
                 }
             `}</style>
 
-            <section className="relative h-screen md:h-screen bg-cover bg-center flex items-center justify-center heritage-animate">
+            <section id="home-header"  className="-mt-28 relative h-screen md:h-screen bg-cover bg-center flex items-center justify-center heritage-animate">
                 <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{

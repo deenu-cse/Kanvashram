@@ -1,5 +1,9 @@
 'use client';
+
+import { Calendar, MapPin, Users, Clock, Leaf, Star, ArrowRight, Heart, Mountain } from "lucide-react";
 import React, { useEffect } from 'react';
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const EventsContributions = () => {
     useEffect(() => {
@@ -24,6 +28,35 @@ const EventsContributions = () => {
 
         return () => observer.disconnect();
     }, []);
+
+    const upcomingEvent = {
+        title: "🌿 Maharishi Kanva Yoga & Ayurveda Spiritual Practice Retreat",
+        subtitle: "At Vedic Gurukul, Kanvashram (Pauri Garhwal, Uttarakhand, INDIA)",
+        date: "23rd – 29th November 2025",
+        description: "Experience the Essence of Yogic Living in the Sacred Land of Maharishi Kanva. A transformative seven-day retreat offering rejuvenation of body, mind, and soul through ancient sciences of Yoga and Ayurveda.",
+        highlights: [
+            "Guidance from world-renowned Yoga Gurus",
+            "Solitary meditation and Maun Spiritual Practice",
+            "Daily Bhim Pran Power Yoga sessions",
+            "Pure Ayurvedic Sattvik meals",
+            "Pollution-free, oxygen-rich natural surroundings"
+        ],
+        schedule: [
+            { time: "4:30 am", activity: "Wake-up & Amrit Drink" },
+            { time: "5:00 – 5:30 am", activity: "Nitya Karm (Morning Rituals)" },
+            { time: "5:30 – 6:30 am", activity: "Prana Power Yoga" },
+            { time: "6:30 – 8:00 am", activity: "Hatha Yoga" },
+            { time: "8:30 – 9:30 am", activity: "Breakfast" },
+            { time: "10:30 – 11:30 am", activity: "Yoga Nidra" },
+            { time: "12:30 – 1:30 pm", activity: "Lunch" },
+            { time: "2:00 – 3:30 pm", activity: "Rest / Relaxation" },
+            { time: "3:30 – 4:30 pm", activity: "Ayurveda Session" },
+            { time: "4:30 – 5:30 pm", activity: "Yoga Class" },
+            { time: "6:00 pm", activity: "Yajna (Sacred Fire Ceremony)" },
+            { time: "7:00 – 8:00 pm", activity: "Dinner" }
+        ],
+        image: "/event.jpeg" 
+    };
 
     const events = [
         {
@@ -200,6 +233,14 @@ const EventsContributions = () => {
                 .sepia-filter {
                     filter: sepia(0.4) contrast(1.1) brightness(1.05);
                 }
+
+                .modern-gradient {
+                    background: linear-gradient(135deg, #059669 0%, #047857 25%, #065f46 50%, #064e3b 100%);
+                }
+
+                .glow-effect {
+                    box-shadow: 0 0 40px rgba(5, 150, 105, 0.3);
+                }
             `}</style>
 
             <section id="home-header" className="relative h-[90vh] -mt-28 bg-cover bg-center flex items-center justify-center">
@@ -216,6 +257,116 @@ const EventsContributions = () => {
                         Events & Contributions
                     </p>
                     <img src="/underline.png" className='w-96' />
+                </div>
+            </section>
+
+            <section className="py-16 px-4 modern-gradient relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-green-400 rounded-full -translate-y-32 translate-x-32 opacity-20"></div>
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber-400 rounded-full translate-y-24 -translate-x-24 opacity-20"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white rounded-full opacity-5"></div>
+                
+                <div className="max-w-6xl mx-auto relative z-10">
+                    <div className="heritage-item text-center mb-12">
+                        <div className="inline-flex items-center px-4 py-2 rounded-full bg-green-500 text-white text-sm font-semibold mb-4">
+                            <Star className="w-4 h-4 mr-2 fill-white" />
+                            Upcoming Special Event
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-cinzel font-bold text-white mb-4">
+                            Spiritual Retreat 2025
+                        </h2>
+                        <p className="text-xl text-green-100 font-playfair max-w-2xl mx-auto">
+                            Join us for a transformative journey in the sacred land of Maharishi Kanva
+                        </p>
+                    </div>
+
+                    <div className="heritage-item">
+                        <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-2xl glow-effect">
+                            <CardContent className="p-0">
+                                <div className="grid lg:grid-cols-2 gap-8">
+                                    <div className="p-8">
+                                        <div className="flex items-center mb-4">
+                                            <div>
+                                                <h3 className="text-2xl font-cinzel font-bold text-green-900">
+                                                    {upcomingEvent.title}
+                                                </h3>
+                                                <p className="text-green-700 font-playfair">
+                                                    {upcomingEvent.subtitle}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-4 mb-6">
+                                            <div className="flex items-center text-green-800">
+                                                <Calendar className="w-5 h-5 mr-3 text-green-600" />
+                                                <span className="font-semibold">{upcomingEvent.date}</span>
+                                            </div>
+                                            <div className="flex items-center text-green-800">
+                                                <MapPin className="w-5 h-5 mr-3 text-green-600" />
+                                                <span>Vedic Gurukul, Kanvashram, Pauri Garhwal</span>
+                                            </div>
+                                            <div className="flex items-center text-green-800">
+                                                <Users className="w-5 h-5 mr-3 text-green-600" />
+                                                <span>7-Day Transformative Retreat</span>
+                                            </div>
+                                        </div>
+
+                                        <p className="text-green-800 leading-relaxed mb-6 font-playfair">
+                                            {upcomingEvent.description}
+                                        </p>
+
+                                        <div className="mb-6">
+                                            <h4 className="font-cinzel text-green-900 text-lg mb-3">Retreat Highlights:</h4>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                                {upcomingEvent.highlights.map((highlight, index) => (
+                                                    <div key={index} className="flex items-center">
+                                                        <Heart className="w-4 h-4 text-green-500 mr-2" />
+                                                        <span className="text-green-700 text-sm">{highlight}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <Button 
+                                            className="w-full bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white font-semibold py-3 text-lg shadow-lg"
+                                            onClick={() => window.location.href = '/newevent'}
+                                        >
+                                            Register for Retreat
+                                            <ArrowRight className="w-5 h-5 ml-2" />
+                                        </Button>
+                                    </div>
+
+                                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-r-lg">
+                                        <div className="flex items-center mb-6">
+                                            <Clock className="w-6 h-6 text-green-600 mr-3" />
+                                            <h4 className="font-cinzel text-green-900 text-xl">Daily Schedule</h4>
+                                        </div>
+                                        
+                                        <div className="space-y-3 max-h-96 overflow-y-scroll">
+                                            {upcomingEvent.schedule.map((item, index) => (
+                                                <div key={index} className="flex items-center justify-between p-3 bg-white rounded-lg border border-green-200 hover:border-green-300 transition-colors">
+                                                    <span className="font-semibold text-green-800 text-sm">
+                                                        {item.time}
+                                                    </span>
+                                                    <span className="text-green-700 text-sm font-playfair">
+                                                        {item.activity}
+                                                    </span>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <div className="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                                            <div className="flex items-center">
+                                                <Mountain className="w-5 h-5 text-amber-600 mr-2" />
+                                                <span className="text-amber-800 font-semibold text-sm">
+                                                    Limited seats available - Register early to secure your spot
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
                 </div>
             </section>
 

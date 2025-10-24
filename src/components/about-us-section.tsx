@@ -157,7 +157,7 @@ export default function AboutUsSection() {
         variants={containerVariants}
       >
         <motion.div className="flex flex-col items-center mb-6" variants={itemVariants}>
-          <h2 className="text-4xl md:text-5xl font-light mb-4 text-center">About Kanvashram</h2>
+          <h2 className="text-4xl md:text-5xl font-light mb-4 text-center">वैदिक गुरुकुल कण्वाश्रम</h2>
           <motion.div
             className="w-24 h-1 bg-[#88734C]"
             initial={{ width: 0 }}
@@ -168,7 +168,7 @@ export default function AboutUsSection() {
 
         <motion.p className="text-center max-w-2xl mx-auto mb-12 text-[#202e44]/80" variants={itemVariants}>
           Nestled 15 km from Kotdwar in Uttarakhand&apos;s dense forests, Kanvashram stands on the sacred ground of Sage Kanva&apos;s hermitage,
-          where King Dushyant and Shakuntala&apos;s son Bharat was born. Founded by Swami Vishwapal Saraswati in 1972, we continue the
+          where King Dushyant and Shakuntala&apos;s son Bharat was born. Founded by PUJAY SWAMI JAYANT SARSWATI in 1972, we continue the
           ancient tradition of spiritual practice, yoga, and Vedic education in this historic setting.
         </motion.p>
 
@@ -200,7 +200,7 @@ export default function AboutUsSection() {
                 whileHover={{ scale: 1.02, transition: { duration: 0.2 } }} // Reduced scale effect
               >
                 <img
-                  src="/smark.jpg"
+                  src="/smarknew.jpg"
                   alt="Modern House"
                   className="w-full h-full object-cover min-h-screen"
                   loading="eager" // Added eager loading

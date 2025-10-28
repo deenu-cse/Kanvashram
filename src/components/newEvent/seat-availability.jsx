@@ -14,7 +14,7 @@ export default function SeatAvailability() {
   useEffect(() => {
     const fetchSeatAvailability = async () => {
       try {
-        const response = await fetch(`${baseUrl}/registrations/seats`)
+        const response = await fetch(`${baseUrl}/user/seats`)
         const data = await response.json()
         
         if (data.success) {

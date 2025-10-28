@@ -17,14 +17,14 @@ const timelineEvents = [
     title: "Birth & Vedic Initiation of Swami Vishwapal",
     description:
       "Born on India’s independence day, Vishwapal Jayant’s Upanayana and Vedic studies at Gurukul Mahavidyalaya marked his journey to become Swami Vishwapal Saraswati.",
-    image: "/guru/swami-viswapal.jpg",
+    image: "/guru/guru1-bg - Copy.png",
   },
   {
     period: "1955",
     title: "Revival of Kanva Ashram",
     description:
       "Nehru’s vision in Moscow and the foundation stone laying by dignitaries rekindled national focus on Kanva Ashram’s cultural and spiritual legacy.",
-    image: "/guru/kanvashram.jpg",
+    image: "/smarknew.jpg",
   },
   {
     period: "1960s–1970s",
@@ -38,7 +38,7 @@ const timelineEvents = [
     title: "Global Spiritual Legacy",
     description:
       "Swami Vishwapal’s dedication to yoga, Ayurveda, and international yoga camps spread the Gurukul ethos worldwide.",
-    image: "/guru/global.jpg",
+    image: "/guru/guru1-bg - Copy.png",
   },
 ];
 

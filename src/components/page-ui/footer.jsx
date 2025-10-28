@@ -118,7 +118,7 @@ const Footer = () => {
                                             <h5 className="font-medium text-sm mb-1">{book.title}</h5>
                                             <p className="text-xs text-gray-400 mb-2">{book.description}</p>
                                             <a href={book.buyLink} target="_blank" rel="noopener noreferrer">
-                                                <button className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 text-xs px-3 py-1 rounded transition-colors duration-300 font-medium">
+                                                <button className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 text-xs px-3 py-1 rounded transition-colors duration-300 font-medium cursor-pointer">
                                                     Buy Now
                                                 </button>
                                             </a>

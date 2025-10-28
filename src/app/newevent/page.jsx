@@ -8,6 +8,7 @@ import RegistrationForm from "@/components/newEvent/registration-form"
 import Footer from "@/components/newEvent/footer"
 import TermsModal from "@/components/newEvent/terms-modal"
 import TicketModal from "@/components/newEvent/ticket-modal"
+import PaymentTracker from "../../components/newEvent/PaymentTracker"
 
 export default function Home() {
   const [showTerms, setShowTerms] = useState(false)
@@ -25,10 +26,11 @@ export default function Home() {
       <About />
       <SeatAvailability />
       <RegistrationForm onSuccess={handleRegistrationSuccess} onTermsClick={() => setShowTerms(true)} />
+      <PaymentTracker />
       <Footer />
 
       <TermsModal open={showTerms} onOpenChange={setShowTerms} />
-      <TicketModal open={showTicket} onOpenChange={setShowTicket} data={ticketData} />
+      {/* <TicketModal open={showTicket} onOpenChange={setShowTicket} data={ticketData} /> */}
     </main>
   )
 }

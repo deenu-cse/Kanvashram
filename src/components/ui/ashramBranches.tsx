@@ -8,7 +8,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 export const AshramBranches = () => {
   const branches = [
     {
-      href: "/branches/kanvashram",
+      href: "#",
       imgSrc: "https://images.pexels.com/photos/167964/pexels-photo-167964.jpeg?auto=compress&cs=tinysrgb&w=1600",
       alt: "Kanvashram Main Ashram",
       bgColor: "bg-gradient-to-br from-amber-50 to-orange-50",
@@ -23,7 +23,7 @@ export const AshramBranches = () => {
       symbol: "🕉️"
     },
     {
-      href: "/branches/parmarth-ashram",
+      href: "#",
       imgSrc: "/smarknew.jpg",
       alt: "Parmarth Ashram",
       bgColor: "bg-gradient-to-br from-emerald-50 to-green-50",
@@ -38,7 +38,7 @@ export const AshramBranches = () => {
       symbol: "🌿"
     },
     {
-      href: "/branches/yogiraj-pharmacy",
+      href: "#",
       imgSrc: "https://i.pinimg.com/736x/a7/ce/2d/a7ce2d3f92fe2216ad2d2e876fec9ab1.jpg",
       alt: "Yogiraj Pharmacy",
       bgColor: "bg-gradient-to-br from-blue-50 to-cyan-50",
@@ -53,7 +53,7 @@ export const AshramBranches = () => {
       symbol: "🌱"
     },
     {
-      href: "/branches/krishi-farm",
+      href: "#",
       imgSrc: "https://i.pinimg.com/736x/4a/17/be/4a17bed3b76e45e96d1f370be265a2bb.jpg",
       alt: "Krishi Farm",
       bgColor: "bg-gradient-to-br from-lime-50 to-green-50",
@@ -68,7 +68,7 @@ export const AshramBranches = () => {
       symbol: "🌾"
     },
     {
-      href: "/branches/gurukul-academy",
+      href: "#",
       imgSrc: "https://images.pexels.com/photos/3184646/pexels-photo-3184646.jpeg?auto=compress&cs=tinysrgb&w=1600",
       alt: "Gurukul International Academy",
       bgColor: "bg-gradient-to-br from-violet-50 to-purple-50",
@@ -83,7 +83,7 @@ export const AshramBranches = () => {
       symbol: "📚"
     },
     {
-      href: "/branches/ayurvedic-treatment",
+      href: "#",
       imgSrc: "https://images.pexels.com/photos/3759657/pexels-photo-3759657.jpeg?auto=compress&cs=tinysrgb&w=1600",
       alt: "Ayurvedic Treatment Center",
       bgColor: "bg-gradient-to-br from-rose-50 to-pink-50",
@@ -98,7 +98,7 @@ export const AshramBranches = () => {
       symbol: "💆"
     },
     {
-      href: "/branches/yogiraj-college",
+      href: "#",
       imgSrc: "https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1600",
       alt: "Yogiraj College of Pharmacy",
       bgColor: "bg-gradient-to-br from-indigo-50 to-blue-50",
@@ -113,7 +113,7 @@ export const AshramBranches = () => {
       symbol: "🎓"
     },
     {
-      href: "/branches/research-centre",
+      href: "#",
       imgSrc: "https://images.pexels.com/photos/2280549/pexels-photo-2280549.jpeg?auto=compress&cs=tinysrgb&w=1600",
       alt: "Research Centre",
       bgColor: "bg-gradient-to-br from-teal-50 to-cyan-50",

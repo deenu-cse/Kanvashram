@@ -175,11 +175,6 @@ const galleryImages = {
             category: "history",
         },
         {
-            id: 33,
-            src: "/gallery/history/h3.jpg",
-            category: "history",
-        },
-        {
             id: 34,
             src: "/gallery/history/h4.jpg",
             category: "history",
@@ -187,26 +182,6 @@ const galleryImages = {
         {
             id: 35,
             src: "/gallery/history/h5.jpg",
-            category: "history",
-        },
-        {
-            id: 36,
-            src: "/gallery/history/h6.jpg",
-            category: "history",
-        },
-        {
-            id: 37,
-            src: "/gallery/history/h7.jpg",
-            category: "history",
-        },
-        {
-            id: 38,
-            src: "/gallery/history/h8.jpg",
-            category: "history",
-        },
-        {
-            id: 39,
-            src: "/gallery/history/h9.jpg",
             category: "history",
         },
         {
@@ -355,9 +330,7 @@ const GalleryPage = () => {
                 </div>
             </section>
 
-            {/* Gallery Content */}
             <section className="py-16 px-4 max-w-7xl mx-auto">
-                {/* Category Filter */}
                 <div ref={addToRefs} className="mb-12 opacity-0">
                     <div className="flex flex-wrap justify-center gap-4 mb-8">
                         {categories.map((category) => (
@@ -379,7 +352,6 @@ const GalleryPage = () => {
                     </div>
                 </div>
 
-                {/* Image Grid */}
                 <div ref={addToRefs} className="opacity-0">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {filteredImages.map((image, index) => (

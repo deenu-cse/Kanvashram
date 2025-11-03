@@ -65,45 +65,105 @@ const galleryImages = {
             src: "/gallery/infrastructure/in12.jpg",
             category: "infrastructure"
         },
+        {
+            id: 13,
+            src: "/gallery/infrastructure/in13.jpg",
+            category: "infrastructure"
+        },
+        {
+            id: 14,
+            src: "/gallery/infrastructure/in14.jpg",
+            category: "infrastructure"
+        },
+        {
+            id: 15,
+            src: "/gallery/infrastructure/in15.jpg",
+            category: "infrastructure"
+        },
     ],
     events: [
         {
-            id: 13,
+            id: 16,
             src: "/gallery/events/e1.jpg",
             category: "events",
         },
         {
-            id: 14,
+            id: 17,
             src: "/gallery/events/e2.jpg",
             category: "events",
         },
         {
-            id: 15,
+            id: 18,
             src: "/gallery/events/e3.jpg",
             category: "events",
         },
         {
-            id: 16,
+            id: 19,
             src: "/gallery/events/e4.jpg",
             category: "events",
         },
         {
-            id: 17,
+            id: 20,
             src: "/gallery/events/e5.jpg",
             category: "events",
         },
         {
-            id: 18,
+            id: 21,
             src: "/gallery/events/e6.jpg",
             category: "events",
         },
         {
-            id: 19,
+            id: 22,
             src: "/gallery/events/e7.jpg",
             category: "events",
         },
         {
-            id: 20,
+            id: 23,
+            src: "/gallery/events/e8.jpg",
+            category: "events",
+        },
+        {
+            id: 24,
+            src: "/gallery/events/e9.jpg",
+            category: "events",
+        },
+        {
+            id: 25,
+            src: "/gallery/events/e10.jpg",
+            category: "events",
+        },
+        {
+            id: 26,
+            src: "/gallery/events/e7.jpg",
+            category: "events",
+        },
+        {
+            id: 27,
+            src: "/gallery/events/e8.jpg",
+            category: "events",
+        },
+        {
+            id: 28,
+            src: "/gallery/events/e5.jpg",
+            category: "events",
+        },
+        {
+            id: 29,
+            src: "/gallery/events/e6.jpg",
+            category: "events",
+        },
+        {
+            id: 30,
+            src: "/gallery/events/e7.jpg",
+            category: "events",
+        },
+        {
+            id: 31,
+            src: "/gallery/events/e8.jpg",
+            category: "events",
+        },
+        {
+            id: 32,
             src: "/gallery/events/e8.jpg",
             category: "events",
         }
@@ -111,89 +171,159 @@ const galleryImages = {
 
     yoga: [
         {
-            id: 21,
+            id: 33,
             src: "/gallery/yoga/y1.jpg",
             category: "yoga"
         },
         {
-            id: 22,
+            id: 34,
             src: "/gallery/yoga/y2.jpg",
             category: "yoga"
         },
         {
-            id: 23,
+            id: 35,
             src: "/gallery/yoga/y3.jpg",
             category: "yoga"
         },
         {
-            id: 24,
+            id: 36,
             src: "/gallery/yoga/y4.jpg",
             category: "yoga"
         },
     ],
     havan: [
         {
-            id: 25,
+            id: 37,
             src: "/gallery/havan/h1.jpg",
             category: "havan"
         },
         {
-            id: 26,
+            id: 38,
             src: "/gallery/havan/h2.jpg",
             category: "havan"
         },
         {
-            id: 27,
+            id: 39,
             src: "/gallery/havan/h3.jpg",
             category: "havan"
         },
         {
-            id: 28,
+            id: 40,
             src: "/gallery/havan/h4.jpg",
             category: "havan"
         },
         {
-            id: 29,
+            id: 41,
             src: "/gallery/havan/h5.jpg",
             category: "havan"
         },
         {
-            id: 30,
+            id: 42,
             src: "/gallery/havan/h6.jpg",
             category: "havan"
         },
     ],
     history: [
         {
-            id: 31,
+            id: 43,
             src: "/gallery/history/h1.jpg",
             category: "history",
         },
         {
-            id: 32,
+            id: 44,
             src: "/gallery/history/h2.jpg",
             category: "history",
         },
         {
-            id: 34,
+            id: 45,
             src: "/gallery/history/h4.jpg",
             category: "history",
         },
         {
-            id: 35,
+            id: 46,
             src: "/gallery/history/h5.jpg",
             category: "history",
         },
         {
-            id: 40,
+            id: 47,
             src: "/gallery/history/h10.jpg",
             category: "history",
         },
         {
-            id: 41,
+            id: 48,
             src: "/gallery/history/h11.jpg",
             category: "history",
         }
+    ],
+
+    frame: [
+        {
+            id: 49,
+            src: "/gallery/frames/f1.jpg",
+            category: "frame",
+        },
+        {
+            id: 50,
+            src: "/gallery/frames/f2.jpg",
+            category: "frame",
+        },
+        {
+            id: 51,
+            src: "/gallery/frames/f3.jpg",
+            category: "frame",
+        },
+        {
+            id: 52,
+            src: "/gallery/frames/f4.jpg",
+            category: "frame",
+        },
+        {
+            id: 53,
+            src: "/gallery/frames/f5.jpg",
+            category: "frame",
+        },
+        {
+            id: 54,
+            src: "/gallery/frames/f6.jpg",
+            category: "frame",
+        },
+        {
+            id: 55,
+            src: "/gallery/frames/f7.jpg",
+            category: "frame",
+        },
+    ],
+    swamiji: [
+        {
+            id: 56,
+            src: "/gallery/swamiji/s1.jpg",
+            category: "swami",
+        },
+        {
+            id: 57,
+            src: "/gallery/swamiji/s2.jpg",
+            category: "swami",
+        },
+        {
+            id: 58,
+            src: "/gallery/swamiji/s3.jpg",
+            category: "swami",
+        },
+        {
+            id: 59,
+            src: "/gallery/swamiji/s4.jpg",
+            category: "swami",
+        },
+        {
+            id: 60,
+            src: "/gallery/swamiji/s5.jpg",
+            category: "swami",
+        },
+        {
+            id: 61,
+            src: "/gallery/swamiji/s6.jpg",
+            category: "swami",
+        },
     ],
 };
 
@@ -216,6 +346,8 @@ const GalleryPage = () => {
         { id: 'yoga', name: 'Yoga', count: galleryImages.yoga.length },
         { id: 'havan', name: 'Havan', count: galleryImages.havan.length },
         { id: 'history', name: 'History', count: galleryImages.history.length },
+        { id: 'frame', name: 'Frames', count: galleryImages.frame.length },
+        { id: 'swami', name: 'Swami Ji', count: galleryImages.swamiji.length },
     ];
 
     const openLightbox = (image, index) => {

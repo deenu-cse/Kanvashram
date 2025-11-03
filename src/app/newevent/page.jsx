@@ -24,7 +24,7 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
       <Hero />
       <About />
-      <SeatAvailability />
+      {/* <SeatAvailability /> */}
       <RegistrationForm onSuccess={handleRegistrationSuccess} onTermsClick={() => setShowTerms(true)} />
       <PaymentTracker />
       <Footer />

@@ -9,11 +9,11 @@ export const AshramBranches = () => {
   const branches = [
     {
       href: "#",
-      imgSrc: "https://images.pexels.com/photos/167964/pexels-photo-167964.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      imgSrc: "/smarknew.jpg",
       alt: "Kanvashram Main Ashram",
       bgColor: "bg-gradient-to-br from-amber-50 to-orange-50",
       text: "Spiritual & Cultural Center",
-      title: "Kanvashram",
+      title: "Vedic Gurukul Kanvashram",
       icon: <Leaf className="w-5 h-5" />,
       titleColor: "text-amber-800",
       borderColor: "border-amber-200",
@@ -22,21 +22,21 @@ export const AshramBranches = () => {
       features: ["Meditation", "Yoga", "Spiritual Discourses"],
       symbol: "🕉️"
     },
-    {
-      href: "#",
-      imgSrc: "/smarknew.jpg",
-      alt: "Parmarth Ashram",
-      bgColor: "bg-gradient-to-br from-emerald-50 to-green-50",
-      text: "Peace & Spiritual Harmony",
-      title: "Parmarth Ashram",
-      icon: <Leaf className="w-5 h-5" />,
-      titleColor: "text-emerald-800",
-      borderColor: "border-emerald-200",
-      gradient: "from-emerald-400 to-green-500",
-      description: "Nestled in nature for deep meditation and spiritual practices",
-      features: ["Silent Retreats", "Nature Walks", "Meditation"],
-      symbol: "🌿"
-    },
+    // {
+    //   href: "#",
+    //   imgSrc: "/smarknew.jpg",
+    //   alt: "Parmarth Ashram",
+    //   bgColor: "bg-gradient-to-br from-emerald-50 to-green-50",
+    //   text: "Peace & Spiritual Harmony",
+    //   title: "Parmarth Ashram",
+    //   icon: <Leaf className="w-5 h-5" />,
+    //   titleColor: "text-emerald-800",
+    //   borderColor: "border-emerald-200",
+    //   gradient: "from-emerald-400 to-green-500",
+    //   description: "Nestled in nature for deep meditation and spiritual practices",
+    //   features: ["Silent Retreats", "Nature Walks", "Meditation"],
+    //   symbol: "🌿"
+    // },
     {
       href: "#",
       imgSrc: "https://i.pinimg.com/736x/a7/ce/2d/a7ce2d3f92fe2216ad2d2e876fec9ab1.jpg",
@@ -139,18 +139,19 @@ export const AshramBranches = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="font-serif text-5xl md:text-6xl font-bold text-amber-900 mb-6">
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-amber-900 mb-4 md:mb-6">
             Sacred Spaces
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto mb-6 rounded-full"></div>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-light">
+          <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto mb-4 md:mb-6 rounded-full"></div>
+          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-light px-4">
             Discover our divine ecosystem of spiritual centers, each dedicated to nurturing 
             <span className="text-amber-600 font-medium"> body, mind, and soul </span>
             through ancient wisdom and modern practices
           </p>
         </div>
 
+        {/* Desktop Grid - hidden on mobile */}
         <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-16">
           {branches.map((branch, index) => (
             <Link
@@ -223,57 +224,72 @@ export const AshramBranches = () => {
           ))}
         </div>
 
+        {/* Mobile Carousel - shown on all screens below lg */}
         <div className="lg:hidden">
-          <Carousel className="w-full">
-            <CarouselContent>
+          <Carousel 
+            className="w-full max-w-full"
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
               {branches.map((branch, index) => (
-                <CarouselItem key={index} className="px-3">
-                  <Link
-                    href={branch.href}
-                    className={cn(
-                      "group relative overflow-hidden rounded-2xl border-2 h-64",
-                      branch.borderColor,
-                      branch.bgColor
-                    )}
-                  >
-                    <div className="absolute inset-0">
-                      <img 
-                        src={branch.imgSrc} 
-                        alt={branch.alt}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                    </div>
-
-                    <div className="relative z-10 flex flex-col justify-end h-full p-4 text-white">
-                      <div className="flex items-center mb-2">
-                        <div className={cn(
-                          "p-1.5 rounded-full bg-white/20 backdrop-blur-sm mr-2",
-                          branch.titleColor
-                        )}>
-                          {branch.icon}
-                        </div>
-                        <h3 className={cn(
-                          "text-lg font-semibold font-serif",
-                          branch.titleColor
-                        )}>
-                          {branch.title}
-                        </h3>
+                <CarouselItem 
+                  key={index} 
+                  className="pl-2 md:pl-4 basis-full sm:basis-1/2"
+                >
+                  <div className="p-1">
+                    <Link
+                      href={branch.href}
+                      className={cn(
+                        "group relative overflow-hidden rounded-2xl border-2 h-64 w-full block",
+                        branch.borderColor,
+                        branch.bgColor
+                      )}
+                    >
+                      <div className="absolute inset-0">
+                        <img 
+                          src={branch.imgSrc} 
+                          alt={branch.alt}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                       </div>
-                      <p className="text-white/90 text-xs mb-3 leading-relaxed">
-                        {branch.description}
-                      </p>
-                      <div className={cn(
-                        "w-full h-1 rounded-full bg-gradient-to-r",
-                        branch.gradient
-                      )} />
-                    </div>
-                  </Link>
+
+                      <div className="relative z-10 flex flex-col justify-end h-full p-4 text-white">
+                        <div className="flex items-center mb-2">
+                          <div className={cn(
+                            "p-1.5 rounded-full bg-white/20 backdrop-blur-sm mr-2",
+                            branch.titleColor
+                          )}>
+                            {branch.icon}
+                          </div>
+                          <h3 className={cn(
+                            "text-lg font-semibold font-serif",
+                            branch.titleColor
+                          )}>
+                            {branch.title}
+                          </h3>
+                        </div>
+                        <p className="text-white/90 text-xs mb-3 leading-relaxed line-clamp-2">
+                          {branch.description}
+                        </p>
+                        <div className={cn(
+                          "w-full h-1 rounded-full bg-gradient-to-r",
+                          branch.gradient
+                        )} />
+                      </div>
+                    </Link>
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="ml-4 bg-white/80 backdrop-blur-sm border-0 text-slate-700 hover:bg-white" />
-            <CarouselNext className="mr-4 bg-white/80 backdrop-blur-sm border-0 text-slate-700 hover:bg-white" />
+            <div className="flex justify-center gap-4 mt-6">
+              <CarouselPrevious className="relative static transform-none bg-white/80 backdrop-blur-sm border-0 text-slate-700 hover:bg-white shadow-lg" />
+              <CarouselNext className="relative static transform-none bg-white/80 backdrop-blur-sm border-0 text-slate-700 hover:bg-white shadow-lg" />
+            </div>
           </Carousel>
         </div>
       </div>

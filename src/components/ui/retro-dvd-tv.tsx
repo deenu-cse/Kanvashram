@@ -12,7 +12,7 @@ const RetroDvdTv = () => {
   const swamiSivpalStory = [
     {
       chapter: "Chapter 1",
-      title: "Atam Katha of Swami Sivpal",
+      title: "Atam Katha of Swami Vishwapal",
       image: "/guru/guru1-bg.png",
       content: `
 Swami Vishwapal Saraswati and Gurukul Kanwashram

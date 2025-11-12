@@ -89,7 +89,7 @@ const KanvashramManagment = () => {
                 <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{
-                        backgroundImage: 'linear-gradient(rgba(90, 70, 50, 0.4), rgba(70, 50, 30, 0.6)), url("/samiti.jpg")'
+                        backgroundImage: 'linear-gradient(rgba(90, 70, 50, 0.4), rgba(70, 50, 30, 0.6)), url("/smarknew.jpg")'
                     }}
                 >
                 </div>

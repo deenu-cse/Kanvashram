@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Progress } from "@/components/ui/progress"
 import { format, differenceInDays } from "date-fns"
-import { CalendarIcon, MapPin, Users, Bed, Shield, CreditCard, CheckCircle2, ArrowLeft, Star, Wifi, Coffee, Car, Utensils, Leaf, Mountain, Heart, Mail, Calendar, Clock } from "lucide-react"
+import { CalendarIcon, MapPin, Users, Bed, Shield, CreditCard, CheckCircle2, ArrowLeft, Star, Wifi, Coffee, Car, Utensils, Leaf, Mountain, Heart, Mail, Calendar, Clock, DoorOpen } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 
@@ -17,7 +17,7 @@ export default function BookingPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [bookingData, setBookingData] = useState(null)
-  const [room, setRoom] = useState(null)
+  const [category, setCategory] = useState(null)
   const [loading, setLoading] = useState(true)
   const [processing, setProcessing] = useState(false)
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
@@ -29,7 +29,7 @@ export default function BookingPage() {
   })
 
   // Get booking parameters from URL
-  const roomId = searchParams.get('roomId')
+  const categoryId = searchParams.get('categoryId')
   const checkIn = searchParams.get('checkIn') ? new Date(searchParams.get('checkIn')) : null
   const checkOut = searchParams.get('checkOut') ? new Date(searchParams.get('checkOut')) : null
   const guests = searchParams.get('guests') || 1
@@ -43,13 +43,13 @@ export default function BookingPage() {
       return
     }
 
-    if (roomId && checkIn && checkOut) {
-      fetchRoomDetails()
+    if (categoryId && checkIn && checkOut) {
+      fetchCategoryDetails()
     } else {
       toast.error("Missing booking information")
       router.push('/')
     }
-  }, [roomId, router, searchParams])
+  }, [categoryId, router, searchParams])
 
   // Countdown effect for success dialog
   useEffect(() => {
@@ -75,10 +75,10 @@ export default function BookingPage() {
     }
   }, [showSuccessDialog, router])
 
-  const fetchRoomDetails = async () => {
+  const fetchCategoryDetails = async () => {
     try {
       const token = localStorage.getItem('ashramUserToken')
-      const response = await fetch(`${baseUrl}/user/room/${roomId}`, {
+      const response = await fetch(`${baseUrl}/user/room/${categoryId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -86,25 +86,26 @@ export default function BookingPage() {
       const data = await response.json()
 
       if (data.success) {
-        setRoom(data.data)
+        setCategory(data.data)
         calculateBookingSummary(data.data)
       } else {
-        toast.error("Failed to fetch room details")
+        toast.error("Failed to fetch room category details")
         router.push('/')
       }
     } catch (error) {
-      console.error('Error fetching room details:', error)
-      toast.error("Error fetching room details")
+      console.error('Error fetching room category details:', error)
+      toast.error("Error fetching room category details")
     } finally {
       setLoading(false)
     }
   }
 
-  const calculateBookingSummary = (roomData) => {
+  const calculateBookingSummary = (categoryData) => {
     if (!checkIn || !checkOut) return
 
     const nights = differenceInDays(checkOut, checkIn)
-    const roomPrice = roomData.price * nights
+    const finalPrice = categoryData.basePrice - (categoryData.basePrice * categoryData.discount / 100)
+    const roomPrice = finalPrice * nights
     const taxes = roomPrice * 0.18 // 18% GST
     const serviceFee = 99
     const totalAmount = roomPrice + taxes + serviceFee
@@ -114,7 +115,8 @@ export default function BookingPage() {
       roomPrice,
       taxes,
       serviceFee,
-      totalAmount
+      totalAmount,
+      finalPrice
     })
   }
 
@@ -132,7 +134,7 @@ export default function BookingPage() {
       return
     }
 
-    if (!roomId || !checkIn || !checkOut) {
+    if (!categoryId || !checkIn || !checkOut) {
       toast.error("Missing booking information")
       return
     }
@@ -147,7 +149,7 @@ export default function BookingPage() {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          roomId,
+          categoryId,
           guestName: guestInfo.guestName,
           guestEmail: guestInfo.guestEmail,
           guestPhone: guestInfo.guestPhone,
@@ -185,11 +187,11 @@ export default function BookingPage() {
     )
   }
 
-  if (!room) {
+  if (!category) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-serif font-semibold text-foreground mb-2">Room not found</h2>
+          <h2 className="text-2xl font-serif font-semibold text-foreground mb-2">Room category not found</h2>
           <Button onClick={() => router.push('/')} className="mt-4">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
@@ -423,12 +425,12 @@ export default function BookingPage() {
                 <CardContent className="space-y-4">
                   <div className="flex items-start space-x-4 p-4 bg-secondary/30 rounded-lg">
                     <img
-                      src={room.images?.[0] || "/placeholder-room.jpg"}
-                      alt={room.name}
+                      src={category.images?.[0] || "/placeholder-room.jpg"}
+                      alt={category.name}
                       className="w-20 h-20 object-cover rounded-lg"
                     />
                     <div className="flex-1">
-                      <h3 className="font-serif font-semibold text-lg text-foreground">{room.name}</h3>
+                      <h3 className="font-serif font-semibold text-lg text-foreground">{category.name}</h3>
                       <div className="flex items-center space-x-4 mt-2 text-sm text-muted-foreground">
                         <div className="flex items-center space-x-1">
                           <Users className="w-4 h-4" />
@@ -436,7 +438,11 @@ export default function BookingPage() {
                         </div>
                         <div className="flex items-center space-x-1">
                           <Bed className="w-4 h-4" />
-                          <span>{room.beds} Bed{room.beds > 1 ? 's' : ''}</span>
+                          <span>{category.beds} Bed{category.beds > 1 ? 's' : ''}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <DoorOpen className="w-4 h-4" />
+                          <span>{category.availableRooms} Available</span>
                         </div>
                       </div>
                       <div className="flex items-center space-x-1 mt-1">
@@ -459,6 +465,10 @@ export default function BookingPage() {
                       <span className="text-muted-foreground">Duration</span>
                       <span className="font-medium text-foreground">{bookingData?.nights} Night{bookingData?.nights > 1 ? 's' : ''}</span>
                     </div>
+                    <div className="flex justify-between items-center py-2 border-b">
+                      <span className="text-muted-foreground">Room Type</span>
+                      <span className="font-medium text-foreground capitalize">{category.type} Room</span>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -469,7 +479,7 @@ export default function BookingPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {room.amenities.map((amenity, index) => (
+                    {category.amenities.map((amenity, index) => (
                       <div key={index} className="flex items-center space-x-2">
                         <CheckCircle2 className="w-4 h-4 text-accent" />
                         <span className="text-sm text-foreground">{amenity}</span>
@@ -494,11 +504,13 @@ export default function BookingPage() {
                     <>
                       <div className="space-y-3">
                         <div className="flex justify-between text-sm">
-                          <span className="text-muted-foreground">₹{room.price} x {bookingData.nights} night{bookingData.nights > 1 ? 's' : ''}</span>
+                          <span className="text-muted-foreground">
+                            ₹{bookingData.finalPrice} x {bookingData.nights} night{bookingData.nights > 1 ? 's' : ''}
+                          </span>
                           <span className="text-foreground">₹{bookingData.roomPrice}</span>
                         </div>
                         <div className="flex justify-between text-sm">
-                          <span className="text-muted-foreground">Taxes & Fees</span>
+                          <span className="text-muted-foreground">Taxes & Fees (18% GST)</span>
                           <span className="text-foreground">₹{bookingData.taxes.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between text-sm">
@@ -512,6 +524,17 @@ export default function BookingPage() {
                           </div>
                         </div>
                       </div>
+
+                      {category.discount > 0 && (
+                        <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+                          <div className="flex items-center space-x-2 text-green-700">
+                            <CheckCircle2 className="w-4 h-4" />
+                            <span className="text-sm font-medium">
+                              You save ₹{(category.basePrice * category.discount / 100) * bookingData.nights} with {category.discount}% discount
+                            </span>
+                          </div>
+                        </div>
+                      )}
 
                       <div className="bg-accent/10 border border-accent/20 rounded-lg p-4">
                         <div className="flex items-center space-x-2 text-accent">
@@ -624,6 +647,13 @@ export default function BookingPage() {
                   <div className="flex items-center space-x-2">
                     <Users className="w-4 h-4 text-green-600" />
                     <span className="text-sm font-medium">{guests} Guest{guests > 1 ? 's' : ''}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between p-3 bg-white/50 dark:bg-white/10 rounded-lg">
+                  <div className="flex items-center space-x-2">
+                    <DoorOpen className="w-4 h-4 text-green-600" />
+                    <span className="text-sm font-medium capitalize">{category.type} Room</span>
                   </div>
                 </div>
               </div>

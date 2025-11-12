@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { format } from "date-fns"
-import { CalendarIcon, MapPin, Users, Bed, Wifi, Coffee, Wind, Droplet, CheckCircle2, Info, Menu, X } from "lucide-react"
+import { CalendarIcon, MapPin, Users, Bed, Wifi, Coffee, Wind, Droplet, CheckCircle2, Info, Menu, X, DoorOpen } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { RulesSection } from "@/components/rules-section"
 import { ImageGallery } from "@/components/image-gallery"
@@ -17,33 +17,34 @@ import { LocationMap } from "@/components/location-map"
 export default function RoomDetailPage({ params }) {
     const router = useRouter()
     const searchParams = useSearchParams()
-    const [room, setRoom] = useState(null)
+    const [category, setCategory] = useState(null)
     const [checkIn, setCheckIn] = useState(searchParams.get('checkIn') ? new Date(searchParams.get('checkIn')) : null)
     const [checkOut, setCheckOut] = useState(searchParams.get('checkOut') ? new Date(searchParams.get('checkOut')) : null)
     const [guests, setGuests] = useState(searchParams.get('guests') || 1)
     const [isAvailable, setIsAvailable] = useState(null)
+    const [availableRoom, setAvailableRoom] = useState(null)
     const [isChecking, setIsChecking] = useState(false)
     const [isRulesOpen, setIsRulesOpen] = useState(false)
     const [loading, setLoading] = useState(true)
 
-    const roomId = params.id
+    const categoryId = params.id
 
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
     useEffect(() => {
-        fetchRoomDetails()
-    }, [roomId])
+        fetchCategoryDetails()
+    }, [categoryId])
 
-    const fetchRoomDetails = async () => {
+    const fetchCategoryDetails = async () => {
         try {
-            const response = await fetch(`${baseUrl}/user/room/${roomId}`)
+            const response = await fetch(`${baseUrl}/user/room/${categoryId}`)
             const data = await response.json()
 
             if (data.success) {
-                setRoom(data.data)
+                setCategory(data.data)
             }
         } catch (error) {
-            console.error('Error fetching room details:', error)
+            console.error('Error fetching category details:', error)
         } finally {
             setLoading(false)
         }
@@ -57,7 +58,7 @@ export default function RoomDetailPage({ params }) {
 
         setIsChecking(true)
         try {
-            const response = await fetch(`${baseUrl}/user/room/${roomId}/check`, {
+            const response = await fetch(`${baseUrl}/user/room/${categoryId}/check`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -73,6 +74,7 @@ export default function RoomDetailPage({ params }) {
 
             if (data.success) {
                 setIsAvailable(data.available)
+                setAvailableRoom(data.availableRoom)
             } else {
                 alert(data.message)
             }
@@ -94,7 +96,7 @@ export default function RoomDetailPage({ params }) {
 
         if (!token) {
             const bookingParams = new URLSearchParams({
-                roomId: roomId,
+                categoryId: categoryId,
                 checkIn: checkIn.toISOString().split('T')[0],
                 checkOut: checkOut.toISOString().split('T')[0],
                 guests: guests
@@ -104,20 +106,23 @@ export default function RoomDetailPage({ params }) {
         }
 
         const bookingParams = new URLSearchParams({
-            roomId: roomId,
+            categoryId: categoryId,
             checkIn: checkIn.toISOString().split('T')[0],
             checkOut: checkOut.toISOString().split('T')[0],
             guests: guests
         })
         router.push(`/stay/booking?${bookingParams.toString()}`)
     }
+
     if (loading) {
         return <div className="min-h-screen flex items-center justify-center">Loading...</div>
     }
 
-    if (!room) {
-        return <div className="min-h-screen flex items-center justify-center">Room not found</div>
+    if (!category) {
+        return <div className="min-h-screen flex items-center justify-center">Room category not found</div>
     }
+
+    const finalPrice = category.basePrice - (category.basePrice * category.discount / 100)
 
     return (
         <>
@@ -299,13 +304,13 @@ export default function RoomDetailPage({ params }) {
                         )}
 
                         <div className="space-y-8">
-                            <ImageGallery images={room.images} />
+                            <ImageGallery images={category.images} />
 
                             <div>
                                 <div className="flex items-start justify-between mb-4">
                                     <div>
                                         <h1 className="text-3xl font-serif font-semibold text-foreground mb-2 text-balance">
-                                            {room.name}
+                                            {category.name}
                                         </h1>
                                         <div className="flex items-center gap-2 text-muted-foreground">
                                             <MapPin className="w-4 h-4" />
@@ -313,32 +318,46 @@ export default function RoomDetailPage({ params }) {
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-3xl font-semibold text-primary">₹{room.price}</div>
-                                        <div className="text-sm text-muted-foreground">per night</div>
+                                        {category.discount > 0 ? (
+                                            <div>
+                                                <div className="text-2xl font-semibold text-primary">₹{finalPrice}</div>
+                                                <div className="text-sm text-muted-foreground line-through">₹{category.basePrice}</div>
+                                                <div className="text-xs text-green-600">Save {category.discount}%</div>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                <div className="text-3xl font-semibold text-primary">₹{category.basePrice}</div>
+                                                <div className="text-sm text-muted-foreground">per night</div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
                                 <div className="flex gap-4 flex-wrap">
                                     <Badge variant="secondary" className="flex items-center gap-1">
                                         <Users className="w-3 h-3" />
-                                        Up to {room.maxGuests} guests
+                                        Up to {category.maxGuests} guests
                                     </Badge>
                                     <Badge variant="secondary" className="flex items-center gap-1">
-                                        <Bed className="w-3 h-3" />{room.beds} {room.beds === 1 ? 'Bed' : 'Beds'}
+                                        <Bed className="w-3 h-3" />{category.beds} {category.beds === 1 ? 'Bed' : 'Beds'}
+                                    </Badge>
+                                    <Badge variant="secondary" className="flex items-center gap-1">
+                                        <DoorOpen className="w-3 h-3" />
+                                        {category.availableRooms} rooms available
                                     </Badge>
                                     <Badge variant="secondary">
-                                        {room.type}
+                                        {category.type.charAt(0).toUpperCase() + category.type.slice(1)} Room
                                     </Badge>
                                 </div>
                             </div>
 
                             <Card>
                                 <CardHeader>
-                                    <CardTitle className="text-xl font-serif">About This Room</CardTitle>
+                                    <CardTitle className="text-xl font-serif">About This Room Category</CardTitle>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
                                     <p className="text-muted-foreground leading-relaxed">
-                                        {room.description}
+                                        {category.description}
                                     </p>
                                 </CardContent>
                             </Card>
@@ -349,7 +368,7 @@ export default function RoomDetailPage({ params }) {
                                 </CardHeader>
                                 <CardContent>
                                     <div className="grid sm:grid-cols-2 gap-4">
-                                        {room.amenities.map((amenity, index) => (
+                                        {category.amenities.map((amenity, index) => (
                                             <div key={index} className="flex items-center gap-3">
                                                 <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
                                                     <CheckCircle2 className="w-5 h-5 text-primary" />
@@ -431,7 +450,7 @@ export default function RoomDetailPage({ params }) {
                                                 onChange={(e) => setGuests(Number(e.target.value))}
                                                 className="w-full h-10 px-3 rounded-md border border-input bg-background"
                                             >
-                                                {Array.from({ length: room.maxGuests }, (_, i) => i + 1).map((num) => (
+                                                {Array.from({ length: category.maxGuests }, (_, i) => i + 1).map((num) => (
                                                     <option key={num} value={num}>
                                                         {num} {num === 1 ? "Guest" : "Guests"}
                                                     </option>
@@ -453,9 +472,15 @@ export default function RoomDetailPage({ params }) {
                                         >
                                             <CheckCircle2 className={cn("w-5 h-5", isAvailable ? "text-accent" : "text-destructive")} />
                                             <div>
-                                                <p className="font-semibold">{isAvailable ? "Room Available!" : "Room Not Available"}</p>
+                                                <p className="font-semibold">
+                                                    {isAvailable ? "Room Available!" : "Room Not Available"}
+                                                </p>
                                                 <p className="text-sm text-muted-foreground">
-                                                    {isAvailable ? "This room is available for your selected dates" : "Please try different dates"}
+                                                    {isAvailable 
+                                                        ? availableRoom 
+                                                            ? `Room ${availableRoom.roomNumber} is available for your selected dates`
+                                                            : "A room in this category is available for your selected dates"
+                                                        : "Please try different dates"}
                                                 </p>
                                             </div>
                                         </div>
@@ -483,6 +508,7 @@ export default function RoomDetailPage({ params }) {
                                     <p>• Valid ID proof required at check-in</p>
                                     <p>• Advance booking recommended during peak season</p>
                                     <p>• Cancellation policy: Free cancellation up to 48 hours before check-in</p>
+                                    <p>• Room assignment will be done at check-in based on availability</p>
                                 </CardContent>
                             </Card>
                         </div>

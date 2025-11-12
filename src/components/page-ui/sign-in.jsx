@@ -43,7 +43,7 @@ export default function SignInPage() {
 
         try {
             const baseUrl = process.env.NEXT_PUBLIC_API_URL
-            const response = await fetch(`${baseUrl}/user/login`, {
+            const response = await fetch(`${baseUrl}/userauth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

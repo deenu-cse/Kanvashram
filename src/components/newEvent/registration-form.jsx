@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
-import { AlertCircle, CheckCircle2, QrCode, Upload, Banknote } from "lucide-react"
+import { AlertCircle, CheckCircle2, QrCode, Upload, Banknote, Calendar, Phone } from "lucide-react"
 
 const categories = [
   { value: "foreigner", label: "Foreigner", price: 500, currency: "USD", display: "$500 USD" },
@@ -219,14 +219,35 @@ export default function RegistrationForm({ onSuccess, onTermsClick }) {
     </div>
   )
 
+  const ImportantNotice = () => (
+    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div className="flex items-center gap-2 text-blue-700">
+            <Calendar className="w-4 h-4" />
+            <span className="text-sm font-semibold">Last Date for Registration:</span>
+            <span className="text-sm">20 November 2025</span>
+          </div>
+          <div className="flex items-center gap-2 text-blue-700">
+            <Phone className="w-4 h-4" />
+            <span className="text-sm font-semibold">Registration Help:</span>
+            <span className="text-sm">+91 98371 62511</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
   if (step === 1) {
     return (
       <section id="registration-form" className="py-20 md:py-32 px-6 md:px-12 max-w-3xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-6">
           <span className="text-primary text-sm font-semibold tracking-widest uppercase">Secure Your Seat</span>
           <h2 className="font-serif text-4xl md:text-5xl text-foreground mt-4 mb-4">Registration Form</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">Join us for a transformative 7-day spiritual retreat.</p>
         </div>
+
+        <ImportantNotice />
 
         <Card className="sacred-border">
           <CardHeader>
@@ -373,6 +394,9 @@ export default function RegistrationForm({ onSuccess, onTermsClick }) {
                   <p>
                     <strong>4. Cancellation Policy:</strong> Cancellations made 30 days before the retreat will receive a full refund.
                   </p>
+                  <p>
+                    <strong>5. Registration Deadline:</strong> Last date for registration is 20 November 2025. Late registrations may not be accepted.
+                  </p>
                 </div>
 
                 <div className="flex items-start space-x-3">
@@ -394,6 +418,16 @@ export default function RegistrationForm({ onSuccess, onTermsClick }) {
                 {errors.termsAccepted && <p className="text-red-500 text-sm flex items-center gap-1"><AlertCircle className="w-4 h-4" /> {errors.termsAccepted}</p>}
               </div>
 
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="flex items-center gap-2 text-blue-700 mb-2">
+                  <Phone className="w-4 h-4" />
+                  <span className="font-semibold">Need Help with Registration?</span>
+                </div>
+                <p className="text-sm text-blue-700">
+                  Contact us at: <strong>+91 XXXXX XXXXX</strong> for any difficulties during registration process.
+                </p>
+              </div>
+
               <Button
                 type="submit"
                 disabled={isSubmitting}
@@ -411,11 +445,13 @@ export default function RegistrationForm({ onSuccess, onTermsClick }) {
   if (step === 2) {
     return (
       <section id="payment-section" className="py-20 md:py-32 px-6 md:px-12 max-w-3xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-6">
           <span className="text-primary text-sm font-semibold tracking-widest uppercase">Complete Your Payment</span>
           <h2 className="font-serif text-4xl md:text-5xl text-foreground mt-4 mb-4">Payment Details</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">Make payment using QR code or bank transfer and upload screenshot</p>
         </div>
+
+        <ImportantNotice />
 
         <Card className="sacred-border">
           <CardHeader>
@@ -485,6 +521,16 @@ export default function RegistrationForm({ onSuccess, onTermsClick }) {
               </div>
             </div>
 
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="flex items-center gap-2 text-blue-700 mb-2">
+                <Phone className="w-4 h-4" />
+                <span className="font-semibold">Payment Issues?</span>
+              </div>
+              <p className="text-sm text-blue-700">
+                Contact us at: <strong>+91 XXXXX XXXXX</strong> for any payment-related difficulties.
+              </p>
+            </div>
+
             <Button
               variant="outline"
               onClick={() => setStep(1)}
@@ -516,6 +562,16 @@ export default function RegistrationForm({ onSuccess, onTermsClick }) {
             <p className="text-sm font-semibold">Transaction ID: {registrationId}</p>
           </div>
           <p className="text-sm text-muted-foreground">Verification typically takes 24-48 hours.</p>
+          
+          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="flex items-center justify-center gap-2 text-blue-700 mb-2">
+              <Phone className="w-4 h-4" />
+              <span className="font-semibold">Need Assistance?</span>
+            </div>
+            <p className="text-sm text-blue-700">
+              Contact us at: <strong>+91 XXXXX XXXXX</strong> for any queries regarding your registration.
+            </p>
+          </div>
         </Card>
       </section>
     )

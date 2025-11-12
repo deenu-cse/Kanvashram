@@ -24,6 +24,7 @@ const Navbar = () => {
         { label: 'Archaeology', href: '/archaeology' },
         { label: 'Events', href: '/events' },
         { label: 'How to Reach', href: '/howtoreach' },
+        { label: 'Managment', href: '/managment' },
         { label: 'Gallery', href: '/gallery' },
         { label: 'Stay', href: '/stay' },
         { label: 'Donate Now', href: '/donate' }

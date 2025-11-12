@@ -8,22 +8,48 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { FilterIcon } from "lucide-react"
 
-
 export function RoomFilters({ onFiltersChange }) {
   const [roomType, setRoomType] = useState("")
   const [amenities, setAmenities] = useState([])
   const [priceRange, setPriceRange] = useState("")
 
   const amenityOptions = [
-    "AC",
-    "WiFi",
-    "Meditation Space",
-    "Garden View",
-    "Balcony",
-    "Attached Bathroom",
+    "Wi-Fi",
+    "Air Conditioning",
     "Hot Water",
-    "Room Service",
+    "Ceiling Fan",
+    "TV",
+    "Safe",
+    "Balcony",
+    "Garden View",
+    "River View",
     "Yoga Mat",
+    "Meditation Cushion",
+    "Prayer Hall Access",
+    "Incense & Lamps",
+    "Ayurvedic Toiletries",
+    "Herbal Tea",
+    "Library with Spiritual Books",
+    "Silence Zone",
+    "Vegetarian Meals",
+    "Organic Food Options",
+    "Ayurvedic Kitchen",
+    "Filtered Drinking Water",
+    "Laundry Service",
+    "Room Service",
+    "Daily Satsang / Bhajan",
+    "Kirtan Hall",
+    "Guru Darshan / Temple Access",
+    "Cow Shelter (Gaushala) Visit",
+    "Seva Opportunities (Volunteering)",
+    "Gardening Area",
+    "Walking Paths",
+    "Morning & Evening Aarti",
+    "Open Courtyard",
+    "Traditional Floor Seating",
+    "Outdoor Meditation Spaces",
+    "Ayurvedic Massage (on request)",
+    "Healing/Detox Programs"
   ]
 
   const handleAmenityChange = (amenity, checked) => {
@@ -97,7 +123,7 @@ export function RoomFilters({ onFiltersChange }) {
         </div>
 
         <div className="space-y-3">
-          <Label className="text-base font-medium">Price Range</Label>
+          <Label className="text-base font-medium">Price Range (per night)</Label>
           <Select value={priceRange} onValueChange={setPriceRange}>
             <SelectTrigger className="border-green-500">
               <SelectValue placeholder="Any price" />
@@ -107,7 +133,8 @@ export function RoomFilters({ onFiltersChange }) {
               <SelectItem value="0-1000">₹0 - ₹1,000</SelectItem>
               <SelectItem value="1000-2000">₹1,000 - ₹2,000</SelectItem>
               <SelectItem value="2000-3000">₹2,000 - ₹3,000</SelectItem>
-              <SelectItem value="3000+">₹3,000+</SelectItem>
+              <SelectItem value="3000-5000">₹3,000 - ₹5,000</SelectItem>
+              <SelectItem value="5000+">₹5,000+</SelectItem>
             </SelectContent>
           </Select>
         </div>

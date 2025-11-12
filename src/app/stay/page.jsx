@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from "react"
 import { RoomFilters } from "@/components/room-filters"
-import { RoomCard } from "@/components/room-card"
+import { RoomCategoryCard } from "@/components/room-category-card"
 import { AvailabilityFilter } from "@/components/availability-filter"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { FilterIcon, XIcon } from "lucide-react"
 
 export default function RoomsPage() {
-    const [rooms, setRooms] = useState([])
-    const [filteredRooms, setFilteredRooms] = useState([])
+    const [categories, setCategories] = useState([])
+    const [filteredCategories, setFilteredCategories] = useState([])
     const [isFiltersOpen, setIsFiltersOpen] = useState(false)
     const [availabilityFilters, setAvailabilityFilters] = useState({
         checkIn: "",
@@ -22,10 +22,10 @@ export default function RoomsPage() {
 
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
-    const fetchAvailableRooms = async (filters) => {
+    const fetchAvailableCategories = async (filters) => {
         setLoading(true)
         try {
-            const response = await fetch(`${baseUrl}/user/room/availability`, {
+            const response = await fetch(`${baseUrl}/users/room/availability`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,17 +36,17 @@ export default function RoomsPage() {
             const data = await response.json()
 
             if (data.success) {
-                setRooms(data.data)
-                setFilteredRooms(data.data)
+                setCategories(data.data)
+                setFilteredCategories(data.data)
             } else {
-                console.error('Error fetching rooms:', data.message)
-                setRooms([])
-                setFilteredRooms([])
+                console.error('Error fetching room categories:', data.message)
+                setCategories([])
+                setFilteredCategories([])
             }
         } catch (error) {
-            console.error('Error fetching rooms:', error)
-            setRooms([])
-            setFilteredRooms([])
+            console.error('Error fetching room categories:', error)
+            setCategories([])
+            setFilteredCategories([])
         } finally {
             setLoading(false)
         }
@@ -54,19 +54,19 @@ export default function RoomsPage() {
 
     const handleAvailabilityChange = async (filters) => {
         setAvailabilityFilters(filters)
-        await fetchAvailableRooms(filters)
+        await fetchAvailableCategories(filters)
     }
 
     const handleFiltersChange = (filters) => {
-        let filtered = rooms
+        let filtered = categories
 
         if (filters.roomType && filters.roomType !== "any") {
-            filtered = filtered.filter((room) => room.type === filters.roomType)
+            filtered = filtered.filter((category) => category.type === filters.roomType)
         }
 
         if (filters.amenities && filters.amenities.length > 0) {
-            filtered = filtered.filter((room) =>
-                filters.amenities.some((amenity) => room.amenities.includes(amenity))
+            filtered = filtered.filter((category) =>
+                filters.amenities.some((amenity) => category.amenities.includes(amenity))
             )
         }
 
@@ -74,23 +74,26 @@ export default function RoomsPage() {
             const [min, max] = filters.priceRange
                 .split("-")
                 .map((p) => (p.includes("+") ? Number.POSITIVE_INFINITY : Number.parseInt(p.replace("₹", "").replace(",", ""))))
-            filtered = filtered.filter((room) => room.price >= min && (max === Number.POSITIVE_INFINITY || room.price <= max))
+            filtered = filtered.filter((category) => {
+                const finalPrice = category.basePrice - (category.basePrice * category.discount / 100)
+                return finalPrice >= min && (max === Number.POSITIVE_INFINITY || finalPrice <= max)
+            })
         }
 
-        setFilteredRooms(filtered)
+        setFilteredCategories(filtered)
 
         if (window.innerWidth < 768) {
             setIsFiltersOpen(false)
         }
     }
 
-    const handleBookNow = (roomId) => {
+    const handleBookNow = (categoryId) => {
         const queryParams = new URLSearchParams({
             checkIn: availabilityFilters.checkIn,
             checkOut: availabilityFilters.checkOut,
             guests: availabilityFilters.guests
         })
-        router.push(`/stay/${roomId}?${queryParams}`)
+        router.push(`/stay/${categoryId}?${queryParams}`)
     }
 
     return (
@@ -289,27 +292,31 @@ export default function RoomsPage() {
                         <div className="flex-1">
                             <div className="mb-6">
                                 <h3 className="text-2xl font-serif font-semibold text-foreground mb-2">
-                                    Available Rooms ({filteredRooms.length})
+                                    Available Room Categories ({filteredCategories.length})
                                 </h3>
                                 {availabilityFilters.checkIn && availabilityFilters.checkOut && (
                                     <p className="text-muted-foreground">
-                                        Showing rooms available from {new Date(availabilityFilters.checkIn).toLocaleDateString()} to {new Date(availabilityFilters.checkOut).toLocaleDateString()}
+                                        Showing room categories available from {new Date(availabilityFilters.checkIn).toLocaleDateString()} to {new Date(availabilityFilters.checkOut).toLocaleDateString()}
                                     </p>
                                 )}
                             </div>
 
                             <div className="space-y-6">
-                                {filteredRooms.map((room) => (
-                                    <RoomCard key={room._id} room={room} onBookNow={handleBookNow} />
+                                {filteredCategories.map((category) => (
+                                    <RoomCategoryCard 
+                                        key={category._id} 
+                                        category={category} 
+                                        onBookNow={handleBookNow} 
+                                    />
                                 ))}
                             </div>
 
-                            {!loading && filteredRooms.length === 0 && (
+                            {!loading && filteredCategories.length === 0 && (
                                 <div className="text-center py-12">
                                     <p className="text-lg text-muted-foreground">
-                                        {rooms.length === 0
-                                            ? "Please select check-in and check-out dates to see available rooms."
-                                            : "No rooms match your current filters. Please adjust your search criteria."}
+                                        {categories.length === 0
+                                            ? "Please select check-in and check-out dates to see available room categories."
+                                            : "No room categories match your current filters. Please adjust your search criteria."}
                                     </p>
                                 </div>
                             )}

@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react"
@@ -9,12 +10,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CalendarIcon, UsersIcon } from "lucide-react"
 
 export function AvailabilityFilter({ onFiltersChange, initialFilters }) {
-  // Helper function to format date as YYYY-MM-DD
   const formatDate = (date) => {
     return date.toISOString().split('T')[0]
   }
 
-  // Get today's and tomorrow's dates
   const today = new Date()
   const tomorrow = new Date(today)
   tomorrow.setDate(tomorrow.getDate() + 1)
@@ -23,14 +22,13 @@ export function AvailabilityFilter({ onFiltersChange, initialFilters }) {
   const [checkOut, setCheckOut] = useState(initialFilters.checkOut || formatDate(tomorrow))
   const [guests, setGuests] = useState(initialFilters.guests || "1")
 
-  // Auto-call API on first load
   useEffect(() => {
     onFiltersChange({
       checkIn: formatDate(today),
       checkOut: formatDate(tomorrow),
       guests: 1,
     })
-  }, []) // Empty dependency array means this runs once on mount
+  }, []) 
 
   const handleSearch = () => {
     onFiltersChange({
@@ -38,6 +36,16 @@ export function AvailabilityFilter({ onFiltersChange, initialFilters }) {
       checkOut,
       guests: Number.parseInt(guests),
     })
+  }
+
+  // Set minimum checkout date based on checkin
+  const getMinCheckoutDate = () => {
+    if (checkIn) {
+      const nextDay = new Date(checkIn)
+      nextDay.setDate(nextDay.getDate() + 1)
+      return formatDate(nextDay)
+    }
+    return formatDate(tomorrow)
   }
 
   return (
@@ -76,7 +84,7 @@ export function AvailabilityFilter({ onFiltersChange, initialFilters }) {
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
               className="border-green-500"
-              min={formatDate(tomorrow)}
+              min={getMinCheckoutDate()}
             />
           </div>
 
@@ -94,6 +102,8 @@ export function AvailabilityFilter({ onFiltersChange, initialFilters }) {
                 <SelectItem value="2">2 Guests</SelectItem>
                 <SelectItem value="3">3 Guests</SelectItem>
                 <SelectItem value="4">4 Guests</SelectItem>
+                <SelectItem value="5">5 Guests</SelectItem>
+                <SelectItem value="6">6+ Guests</SelectItem>
               </SelectContent>
             </Select>
           </div>

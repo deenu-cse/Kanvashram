@@ -7,6 +7,7 @@ import { AvailabilityFilter } from "@/components/availability-filter"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { FilterIcon, XIcon } from "lucide-react"
+import axios from "axios"
 
 export default function RoomsPage() {
     const [categories, setCategories] = useState([])
@@ -23,34 +24,28 @@ export default function RoomsPage() {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
     const fetchAvailableCategories = async (filters) => {
-        setLoading(true)
+        setLoading(true);
         try {
-            const response = await fetch(`${baseUrl}/users/room/availability`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(filters),
-            })
+            const response = await axios.post(`${baseUrl}/users/room/availability`, filters);
 
-            const data = await response.json()
+            const data = response.data;
 
             if (data.success) {
-                setCategories(data.data)
-                setFilteredCategories(data.data)
+                setCategories(data.data);
+                setFilteredCategories(data.data);
             } else {
-                console.error('Error fetching room categories:', data.message)
-                setCategories([])
-                setFilteredCategories([])
+                console.error("Error fetching room categories:", data.message);
+                setCategories([]);
+                setFilteredCategories([]);
             }
         } catch (error) {
-            console.error('Error fetching room categories:', error)
-            setCategories([])
-            setFilteredCategories([])
+            console.error("Error fetching room categories:", error);
+            setCategories([]);
+            setFilteredCategories([]);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
 
     const handleAvailabilityChange = async (filters) => {
         setAvailabilityFilters(filters)
@@ -303,10 +298,10 @@ export default function RoomsPage() {
 
                             <div className="space-y-6">
                                 {filteredCategories.map((category) => (
-                                    <RoomCategoryCard 
-                                        key={category._id} 
-                                        category={category} 
-                                        onBookNow={handleBookNow} 
+                                    <RoomCategoryCard
+                                        key={category._id}
+                                        category={category}
+                                        onBookNow={handleBookNow}
                                     />
                                 ))}
                             </div>

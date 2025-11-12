@@ -28,7 +28,6 @@ export default function BookingPage() {
     guestPhone: ""
   })
 
-  // Get booking parameters from URL
   const categoryId = searchParams.get('categoryId')
   const checkIn = searchParams.get('checkIn') ? new Date(searchParams.get('checkIn')) : null
   const checkOut = searchParams.get('checkOut') ? new Date(searchParams.get('checkOut')) : null
@@ -51,7 +50,6 @@ export default function BookingPage() {
     }
   }, [categoryId, router, searchParams])
 
-  // Countdown effect for success dialog
   useEffect(() => {
     if (showSuccessDialog) {
       const duration = 5000 // 5 seconds
@@ -78,7 +76,7 @@ export default function BookingPage() {
   const fetchCategoryDetails = async () => {
     try {
       const token = localStorage.getItem('ashramUserToken')
-      const response = await fetch(`${baseUrl}/user/room/${categoryId}`, {
+      const response = await fetch(`${baseUrl}/users/room/${categoryId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -106,8 +104,8 @@ export default function BookingPage() {
     const nights = differenceInDays(checkOut, checkIn)
     const finalPrice = categoryData.basePrice - (categoryData.basePrice * categoryData.discount / 100)
     const roomPrice = finalPrice * nights
-    const taxes = roomPrice * 0.18 // 18% GST
-    const serviceFee = 99
+    const taxes = 0
+    const serviceFee = 0
     const totalAmount = roomPrice + taxes + serviceFee
 
     setBookingData({
@@ -142,7 +140,7 @@ export default function BookingPage() {
     setProcessing(true)
     try {
       const token = localStorage.getItem('ashramUserToken')
-      const response = await fetch(`${baseUrl}/user/book`, {
+      const response = await fetch(`${baseUrl}/users/book`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -509,14 +507,14 @@ export default function BookingPage() {
                           </span>
                           <span className="text-foreground">₹{bookingData.roomPrice}</span>
                         </div>
-                        <div className="flex justify-between text-sm">
+                        {/* <div className="flex justify-between text-sm">
                           <span className="text-muted-foreground">Taxes & Fees (18% GST)</span>
                           <span className="text-foreground">₹{bookingData.taxes.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between text-sm">
                           <span className="text-muted-foreground">Service Fee</span>
                           <span className="text-foreground">₹{bookingData.serviceFee}</span>
-                        </div>
+                        </div> */}
                         <div className="border-t pt-3">
                           <div className="flex justify-between text-lg font-bold">
                             <span className="text-foreground">Total Amount</span>

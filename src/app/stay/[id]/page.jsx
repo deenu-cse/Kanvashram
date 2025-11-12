@@ -37,7 +37,7 @@ export default function RoomDetailPage({ params }) {
 
     const fetchCategoryDetails = async () => {
         try {
-            const response = await fetch(`${baseUrl}/user/room/${categoryId}`)
+            const response = await fetch(`${baseUrl}/users/room/${categoryId}`)
             const data = await response.json()
 
             if (data.success) {
@@ -58,7 +58,7 @@ export default function RoomDetailPage({ params }) {
 
         setIsChecking(true)
         try {
-            const response = await fetch(`${baseUrl}/user/room/${categoryId}/check`, {
+            const response = await fetch(`${baseUrl}/users/room/${categoryId}/check`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
